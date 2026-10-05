@@ -3,254 +3,232 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050706'/%3E%3Crect x='3' y='3' width='58' height='58' rx='12' fill='none' stroke='%2322c55e' stroke-width='3'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='monospace' font-weight='700' font-size='28' fill='%2322c55e'%3ES4%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080808'/%3E%3Crect x='3' y='3' width='58' height='58' rx='12' fill='none' stroke='%2310e56b' stroke-width='3'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='monospace' font-weight='700' font-size='28' fill='%2310e56b'%3ES4%3C/text%3E%3C/svg%3E">
 <title>S4NTRX — Cybersecurity Researcher & Tool Builder</title>
 <meta name="description" content="S4NTRX builds threat-detection tooling, incident-response references and security education platforms.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--bg:#050706;--danger:#ef4444;--surface:rgba(255,255,255,.05);--surface-strong:rgba(255,255,255,.09);--ink:#e8edf7;--muted:#9aa89f;--line:rgba(255,255,255,.11);--accent:#22c55e;--accent-soft:rgba(34,197,94,.14);--radius:16px;--space:clamp(64px,9vw,112px);--heading:"Space Grotesk",Inter,system-ui,sans-serif;--glass-blur:blur(20px) saturate(150%);--shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+:root{color-scheme:dark;--bg:#080808;--surface:#101010;--ink:#f4f4f5;--muted:#a3a3a3;--line:#242424;--green:#10e56b;--red:#ff2d2d;--accent:var(--green);--danger:var(--red);--green-tint:rgba(16,229,107,.12);--red-tint:rgba(255,45,45,.12);--radius:18px;--space:clamp(72px,9vw,120px);--heading:"Space Grotesk",Inter,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;--glass-blur:blur(16px) saturate(140%);--shadow:0 8px 32px rgba(0,0,0,.45)}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{font:16px/1.65 Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
-h1,h2,h3,.brand,.stats b,.lab-meters b{font-family:var(--heading)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M64 0H0v64' fill='none' stroke='%23fff' stroke-opacity='.045'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
 .icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.wrap{width:min(1160px,100% - 48px);margin-inline:auto}
-header{position:sticky;top:0;z-index:10;background:rgba(5,7,6,.75);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border-bottom:1px solid var(--line)}
-nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{font-weight:700;font-size:19px;letter-spacing:-.02em}
-nav ul{display:flex;gap:32px;list-style:none;padding:0;font-size:15px;font-weight:500;color:var(--muted)}
-nav ul a:hover{color:var(--ink)}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid var(--line);background:var(--surface);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);transition:transform .15s,background .15s}
-.btn:hover{transform:translateY(-1px);background:var(--surface-strong)}
-.btn-primary{background:var(--accent);color:#04140a;border-color:var(--accent)}
-.btn-primary:hover{background:#4ade80;border-color:#4ade80}
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,88px);align-items:center;padding-block:clamp(48px,7vw,96px)}
-.hero h1{font-size:clamp(56px,9vw,112px);line-height:1.04;letter-spacing:-.035em;font-weight:700;margin-bottom:24px}
-.hero p{font-size:19px;color:var(--muted);max-width:520px;margin-bottom:36px}
+.icon.fill{fill:currentColor}
+.wrap{width:min(1180px,100% - 48px);margin-inline:auto}
+h1,h2,h3,.stats b{font-family:var(--heading)}
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:8px;padding:8px 8px 8px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(10,10,10,.8);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);box-shadow:var(--shadow);white-space:nowrap}
+.brand{display:flex;align-items:center;gap:10px;margin-right:10px;font:700 15px var(--mono)}
+.brand svg{width:22px;height:22px;color:#fff}
+.nav ul{display:flex;gap:2px;list-style:none;padding:0}
+.nav ul a{display:block;padding:8px 14px;border-radius:999px;color:#c9c9c9;font:600 13px var(--mono);transition:color .15s,background .15s}
+.nav ul a:hover{color:#fff;background:#1a1a1a}
+.pill-red{padding:10px 20px;border-radius:999px;background:var(--red);color:#fff;font:700 13px var(--mono);transition:background .15s}
+.pill-red:hover{background:#ff4a4a}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;border:1px solid #2c2c2c;background:#171717;color:#fff;font:600 13px var(--mono);transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--green);background:#1d1d1d}
+.btn-red{background:var(--red);border-color:var(--red)}
+.btn-red:hover{background:#ff4a4a;border-color:#ff4a4a}
 .actions{display:flex;flex-wrap:wrap;gap:12px}
-.portrait{position:relative;aspect-ratio:4/5;border-radius:24px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--line)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,88px);align-items:center;padding-block:clamp(112px,14vw,160px) clamp(48px,7vw,88px)}
+.status{display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--green);font:500 12px var(--mono);letter-spacing:.08em}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+.hero h1{font-size:clamp(60px,9.5vw,120px);line-height:1;letter-spacing:-.04em;font-weight:700;margin-bottom:24px}
+.lede{max-width:540px;margin-bottom:28px;color:var(--muted);font-size:18px}
+.terminal{max-width:520px;margin:0 0 32px;border:1px solid var(--line);border-radius:14px;background:#050505;overflow:hidden}
+.terminal-bar{display:flex;gap:8px;padding:14px 16px 4px}
+.terminal-bar i{width:11px;height:11px;border-radius:50%}
+.terminal-bar i:nth-child(1){background:var(--red)}.terminal-bar i:nth-child(2){background:#fff}.terminal-bar i:nth-child(3){background:var(--green)}
+.terminal p{padding:12px 16px 18px;font:500 14px var(--mono);white-space:nowrap;overflow:hidden}
+.prompt{color:var(--green)}
+.cursor{display:inline-block;width:9px;height:16px;margin-left:2px;background:var(--red);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.portrait{position:relative;margin:0;aspect-ratio:4/5;border-radius:24px;overflow:hidden;background:var(--surface);border:1px solid var(--line)}
 .portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-.portrait figcaption{position:absolute;left:16px;right:16px;bottom:16px;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-radius:12px;background:rgba(5,7,6,.65);border:1px solid var(--line);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);font-size:14px}
-.portrait strong{display:block;font-size:16px}
-.portrait span{color:var(--muted)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-.stats li{list-style:none;padding:28px;border-left:1px solid var(--line)}
+.portrait figcaption{position:absolute;left:14px;right:14px;bottom:14px;padding:14px 18px;border-radius:14px;background:rgba(8,8,8,.72);border:1px solid var(--line);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
+.portrait strong{display:block;font:700 18px var(--heading)}
+.portrait span{display:block;color:var(--green);font:500 12px var(--mono);letter-spacing:.06em}
+.portrait small{display:block;margin-top:4px;color:var(--muted);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);padding:0;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.stats li{padding:28px;border-left:1px solid var(--line)}
 .stats li:first-child{border-left:0}
-.stats b{display:block;font-size:34px;letter-spacing:-.03em;line-height:1.1}
-.stats b{color:var(--accent)}
+.stats b{display:block;font-size:36px;line-height:1.1;letter-spacing:-.03em;color:var(--green)}
+.stats li:nth-child(even) b{color:var(--red)}
 .stats span{color:var(--muted);font-size:14px}
 section{padding-top:var(--space)}
-.heading{max-width:640px;margin-bottom:48px}
-.heading h2{font-size:clamp(30px,4vw,44px);line-height:1.1;letter-spacing:-.03em;font-weight:700;margin-bottom:14px}
-.heading p{color:var(--muted);font-size:18px}
+.section-head{display:grid;grid-template-columns:1fr minmax(260px,420px);grid-template-areas:"eyebrow desc" "title desc";column-gap:40px;align-items:end;margin-bottom:48px}
+.eyebrow{grid-area:eyebrow;display:flex;align-items:center;gap:14px;margin-bottom:18px;color:var(--red);font:500 12px var(--mono);letter-spacing:.22em;text-transform:uppercase}
+.eyebrow::before{content:"";width:44px;height:1px;background:var(--red)}
+.section-head h2{grid-area:title;font-size:clamp(36px,5vw,58px);line-height:1.04;letter-spacing:-.03em;font-weight:700;max-width:560px}
+.section-desc{grid-area:desc;color:var(--muted);font-size:16px}
+.tile .icon{width:20px;height:20px}
+.tile{display:grid;place-items:center;width:44px;height:44px;margin-bottom:22px;border-radius:12px}
+.tile.green{background:var(--green-tint);color:var(--green)}.tile.red{background:var(--red-tint);color:var(--red)}
 .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.project{display:flex;flex-direction:column;gap:14px;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);transition:background .2s,border-color .2s}
-.project:hover{background:var(--surface-strong);border-color:rgba(34,197,94,.5)}
-.project header{all:unset;display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
-.project h3{font-size:19px;letter-spacing:-.01em}
-.project p{color:var(--muted);font-size:15px;flex:1}
-.project footer{display:flex;gap:18px;align-items:center;font-size:13px;color:var(--muted);padding-top:14px;border-top:1px solid var(--line)}
-.project footer span{display:inline-flex;align-items:center;gap:6px}
-.tag{margin-left:auto;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+.project{position:relative;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto auto;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);transition:border-color .2s}
+.project:hover{border-color:var(--green)}
+.project>*{grid-column:1/-1}
+.project .tile{grid-column:1;grid-row:1}
+.project .chip{grid-column:2;grid-row:1;align-self:start}
+.project h3,.skill h3{line-height:1.25}
+.project h3{grid-row:2;font-size:21px;font-weight:600;letter-spacing:-.01em;margin-bottom:12px}
+.project h3 a::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.project p{grid-row:3;color:var(--muted);font-size:15px;margin-bottom:20px}
+.project .lang{grid-row:4}.project .repo-stats{grid-row:5}
+.chip{position:relative;z-index:1;padding:5px 12px;border:1px solid #2c2c2c;border-radius:999px;color:#bdbdbd;font:500 10.5px var(--mono);letter-spacing:.12em}
+a.chip:hover{border-color:var(--green);color:var(--green)}
+.lang{display:flex;align-items:center;gap:8px;margin-bottom:18px;color:#c9c9c9;font:500 12px var(--mono)}
+.lang::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+.lang.red::before{background:var(--red)}
+.repo-stats{display:flex;gap:18px;padding-top:16px;border-top:1px solid var(--line);color:#c9c9c9;font:500 12px var(--mono)}
+.repo-stats span{display:inline-flex;align-items:center;gap:6px}
+.repo-stats .star{color:var(--red)}.repo-stats .fork{color:var(--green)}
+.repo-stats .icon{width:15px;height:15px}
 .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.skills article{padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
-.skills .icon{width:26px;height:26px;color:var(--danger);margin-bottom:18px}
-.skills h3{font-size:17px;margin-bottom:8px}
-.skills p{color:var(--muted);font-size:14.5px}
-.contact{display:flex;flex-direction:column;align-items:flex-start;gap:20px;padding:clamp(32px,6vw,72px);background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);color:#fff;border-radius:24px}
-.contact h2{font-size:clamp(30px,4vw,48px);line-height:1.1;letter-spacing:-.03em;max-width:640px}
-.contact p{color:#b6bdcc;max-width:520px;font-size:18px}
-.contact .btn{background:var(--accent);color:#04140a;border-color:var(--accent)}
-.contact .btn:hover{background:#4ade80}
-.contact .btn-outline{background:transparent;color:#fff;border-color:var(--danger)}
-.contact .btn-outline:hover{background:rgba(239,68,68,.16)}
+.skill{display:flex;flex-direction:column;padding:26px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);transition:border-color .2s}
+.skill.green{--bar:var(--green)}.skill.red{--bar:var(--red)}
+.skill:hover{border-color:var(--bar)}
+.skill h3{margin-bottom:10px;font-size:17px;font-weight:600}
+.skill p{flex:1;margin-bottom:20px;color:var(--muted);font-size:14px}
+.meter{height:5px;margin-bottom:10px;border-radius:99px;background:#232323;overflow:hidden}
+.meter i{display:block;height:100%;width:var(--level);border-radius:inherit;background:var(--bar)}
+.level{color:#a3a3a3;font:500 11px var(--mono);letter-spacing:.1em}
+.contact{display:flex;flex-direction:column;align-items:center;gap:22px;padding:clamp(40px,7vw,88px) 24px;text-align:center;background:#0e0e0e;border:1px solid var(--line);border-radius:28px}
+.contact h2{max-width:720px;font-size:clamp(34px,5vw,56px);line-height:1.2;letter-spacing:-.02em;font-weight:700}
+.contact h2 em{font-style:normal;color:var(--red)}
+.contact p{max-width:520px;color:var(--muted)}
+.contact .actions{justify-content:center}
 footer.site{margin-top:var(--space);padding-block:40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
+.site-name{color:var(--ink);font:700 13px var(--mono)}
 .badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:0;list-style:none}
-.badges a{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);color:var(--ink);font-weight:600;font-size:14px;transition:border-color .15s,color .15s}
-.badges a:hover{border-color:var(--accent);color:var(--accent)}
+.badges a{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 13px var(--mono);transition:border-color .15s,color .15s}
+.badges a:hover{border-color:var(--green);color:var(--green)}
 .map-panel{position:relative;margin:0;border:1px solid var(--line);border-radius:24px;background:#000;box-shadow:var(--shadow);overflow:hidden}
 #attack-map{display:block;width:100%;height:clamp(380px,56vw,540px)}
-.map-legend{position:absolute;left:20px;bottom:16px;display:grid;gap:4px;font:12px ui-monospace,Menlo,Consolas,monospace}
+.map-legend{position:absolute;left:20px;bottom:16px;display:grid;gap:4px;font:12px 'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace}
 .map-legend span::before{content:"";display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:currentColor}
 .origin,.outgoing{color:var(--accent)}.incoming{color:var(--danger)}
 .map-legend b{margin-left:6px;color:#fff}
-.lab{background:rgba(255,255,255,.04);border:1px solid var(--line);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);color:#dbe4f3;border-radius:24px;padding:clamp(20px,4vw,40px);--lab-line:#1d2a22;--lab-text:#8fa396;--ok:#22c55e;--bad:#f43f5e;--warn:#fca5a5;--info:#86efac}
+.lab{background:rgba(255,255,255,.04);border:1px solid var(--line);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);color:#dbe4f3;border-radius:24px;padding:clamp(20px,4vw,40px);--lab-line:#1d2a22;--lab-text:#8fa396;--ok:#10e56b;--bad:#ff2d2d;--warn:#ff8a8a;--info:#8dffc0}
 .lab-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .lab-tabs button,.lab-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;border:1px solid var(--lab-line);background:transparent;color:var(--lab-text);font:600 14px Inter,sans-serif;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
 .lab-tabs button:hover,.lab-btn:hover:not(:disabled){color:#fff;border-color:#3a5446}
 .lab-tabs button[aria-selected=true]{background:var(--ok);border-color:var(--ok);color:#052e16}
 .lab-btn:disabled{opacity:.4;cursor:not-allowed}
-.lab-btn.go{color:var(--ok);border-color:#166534}
-.lab-btn.stop{color:var(--bad);border-color:#9f1239}
+.lab-btn.go{color:var(--ok);border-color:#0b7a3c}
+.lab-btn.stop{color:var(--bad);border-color:#a31212}
 .lab-window{border:1px solid var(--lab-line);border-radius:14px;background:rgba(0,0,0,.5);overflow:hidden}
-.lab-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--lab-line);color:var(--lab-text);font:500 13px ui-monospace,Menlo,Consolas,monospace}
+.lab-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--lab-line);color:var(--lab-text);font:500 13px 'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace}
 .lab-bar i{width:11px;height:11px;border-radius:50%;background:#2a3a31}
 .lab-bar span{margin-left:auto}
 .lab-body{padding:20px}
 .lab-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
 .lab-status{margin-left:auto;display:inline-flex;align-items:center;gap:8px;color:var(--lab-text);font-size:13px}
 .lab-status::before{content:"";width:9px;height:9px;border-radius:50%;background:#475569}
-.lab-status[data-live=true]::before{background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.2)}
+.lab-status[data-live=true]::before{background:var(--ok);box-shadow:0 0 0 4px rgba(16,229,107,.2)}
 .lab-meters{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
 .lab-meters p{padding:14px 16px;border:1px solid var(--lab-line);border-radius:10px;font-size:13px;color:var(--lab-text)}
 .lab-meters b{display:block;font-size:24px;color:#fff;letter-spacing:-.02em}
 .lab-mix{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--lab-line);margin-bottom:16px}
 .lab-mix span{transition:width .3s}
 .lab-scroll{max-height:320px;overflow:auto;border:1px solid var(--lab-line);border-radius:10px}
-.lab table{width:100%;border-collapse:collapse;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
+.lab table{width:100%;border-collapse:collapse;font:12.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
 .lab th{position:sticky;top:0;background:#0a110d;text-align:left;padding:10px 14px;color:var(--lab-text);font-weight:600}
 .lab td{padding:8px 14px;border-top:1px solid #15201a}
 .lab tbody:empty::after{content:"No packets yet. Press Start to begin a simulated capture.";display:block;padding:24px 14px;color:var(--lab-text);font-family:Inter,sans-serif}
 .p-TCP,.p-HTTPS,.open{color:var(--ok)}.p-UDP,.p-DNS,.filtered{color:var(--info)}.p-ICMP,.p-ARP{color:var(--warn)}.closed{color:var(--bad)}
-.lab input,.lab textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--lab-line);background:#0a110d;color:#fff;font:14px ui-monospace,Menlo,Consolas,monospace}
+.lab input,.lab textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--lab-line);background:#0a110d;color:#fff;font:14px 'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace}
 .lab input:focus,.lab textarea:focus{outline:2px solid var(--ok);outline-offset:1px}
 .lab-row{display:flex;gap:10px;margin-bottom:16px}
 .lab-row input{flex:1}
 .lab-note{color:var(--lab-text);font-size:13px;margin-top:14px}
 .hash-list{display:grid;gap:10px;margin-top:16px}
 .hash-list p{padding:12px 14px;border:1px solid var(--lab-line);border-radius:10px;font-size:12px;color:var(--lab-text)}
-.hash-list code,.lab output{display:block;margin-top:4px;color:#fff;font:13px ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.hash-list code,.lab output{display:block;margin-top:4px;color:#fff;font:13px 'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
 .lab output{padding:14px;border:1px solid var(--lab-line);border-radius:10px;min-height:48px;margin-top:16px}
 .lab-body[hidden]{display:none}
-@media(max-width:960px){.hero{grid-template-columns:1fr}.portrait{max-width:520px}.projects,.skills{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.stats li:nth-child(3){border-left:0}.stats li:nth-child(n+3){border-top:1px solid var(--line)}}
-@media(max-width:620px){nav ul{display:none}.projects,.skills{grid-template-columns:1fr}.hero p{font-size:17px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+@media(max-width:960px){.hero{grid-template-columns:1fr}.portrait{max-width:520px}.projects,.skills{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.stats li:nth-child(3){border-left:0}.stats li:nth-child(n+3){border-top:1px solid var(--line)}.section-head{grid-template-columns:1fr;grid-template-areas:"eyebrow" "title" "desc";row-gap:16px}}
+@media(max-width:860px){.nav ul{display:none}}
+@media(max-width:620px){.projects,.skills{grid-template-columns:1fr}.lede{font-size:17px}.terminal p{font-size:12.5px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-<symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></symbol>
-<symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
-<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2L8 14.2 3 9.3l6.9-1z"/></symbol>
-<symbol id="i-fork" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M6 7v2a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7M12 12v5"/></symbol>
-<symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></symbol>
-<symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
-<symbol id="i-win" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 14l2 2-2 2M12 18h4" transform="translate(0 -3)"/></symbol>
-<symbol id="i-net" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v5m0 0-6 5m6-5 6 5"/></symbol>
-<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
-<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
-<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
-<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2zM4 19V5"/></symbol>
-<symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></symbol>
-<symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></symbol>
-<symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></symbol>
-<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
-<symbol id="i-in" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5m0 2a2.5 2.5 0 0 1 5 0v3"/></symbol>
-<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0h11l-2 4 2 4H5"/></symbol>
-<symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12 4 7.5"/></symbol>
-<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
-<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
-<symbol id="i-hook" viewBox="0 0 24 24"><path d="M12 3v9a4 4 0 1 0 4 4M8 3h8"/></symbol>
-</svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2L8 14.2 3 9.3l6.9-1z"/></symbol><symbol id="i-fork" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M6 7v2a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7M12 12v5"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></symbol><symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol><symbol id="i-in" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5m0 2a2.5 2.5 0 0 1 5 0v3"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0h11l-2 4 2 4H5"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12 4 7.5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol><symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2zM4 19V5M8 7h8"/></symbol><symbol id="i-robot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><circle cx="12" cy="4" r="1"/><path d="M12 5v3M9 13h.01M15 13h.01M9 17h6"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4M9.5 8.5 8 10l1.5 1.5M14.5 8.5 16 10l-1.5 1.5"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol><symbol id="i-code" viewBox="0 0 24 24"><path d="m9 8-4 4 4 4M15 8l4 4-4 4"/></symbol><symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol><symbol id="i-cap" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5M22 9v6"/></symbol><symbol id="i-net" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v5m0 0-6 5m6-5 6 5"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8v11l3-2 2.5 2 2.5-2 2.5 2 2.5-2 3 2V10a8 8 0 0 0-8-8z" fill="currentColor"/><circle cx="9" cy="10.5" r="1.6" fill="#080808"/><circle cx="15" cy="10.5" r="1.6" fill="#080808"/></symbol></svg>
 
-<header>
-  <nav class="wrap" aria-label="Primary">
-    <a class="brand" href="#top">S4NTRX</a>
-    <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#skills">Expertise</a></li>
-      <li><a href="#map">Map</a></li>
-      <li><a href="#lab">Lab</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a class="btn btn-primary" href="https://github.com/s4ntrx"><svg class="icon"><use href="#i-github"/></svg>GitHub</a>
-  </nav>
+<header class="nav">
+  <a class="brand" href="#top" aria-label="S4NTRX home"><svg><use href="#i-logo"/></svg>S4NTRX</a>
+  <nav aria-label="Primary"><ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#map">Map</a></li>
+    <li><a href="#lab">Lab</a></li>
+    <li><a href="#contact">Connect</a></li>
+  </ul></nav>
+  <a class="pill-red" href="https://github.com/s4ntrx" target="_blank" rel="noopener">GitHub</a>
 </header>
 
 <main id="top">
   <div class="wrap hero">
     <div>
+      <p class="status">ONLINE — BASTION HOST ACTIVE</p>
       <h1>S4NTRX</h1>
-      <p>Cybersecurity researcher and builder. I write threat-detection scripts, incident-response references and training platforms, from dark-web reconnaissance to Windows forensics.</p>
+      <p class="lede">A cybersecurity researcher and builder focused on threat detection, security tooling, and practical education. From dark-web reconnaissance to Windows incident response, I ship tools that make defenders faster.</p>
+      <figure class="terminal">
+        <span class="terminal-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+        <p><span class="prompt">s4ntrx@bastion:~$</span> <span id="terminal-command">./darkweb_recon --safe</span><span class="cursor" aria-hidden="true"></span></p>
+      </figure>
       <div class="actions">
-        <a class="btn btn-primary" href="#work">View projects<svg class="icon"><use href="#i-out"/></svg></a>
-        <a class="btn" href="https://github.com/s4ntrx?tab=repositories"><svg class="icon"><use href="#i-github"/></svg>All repositories</a>
+        <a class="btn btn-red" href="https://github.com/s4ntrx?tab=repositories" target="_blank" rel="noopener">View Repositories</a>
+        <a class="btn" href="#work">Explore Work</a>
       </div>
     </div>
     <figure class="portrait">
       <img src="portrait.jpg" alt="Portrait of S4NTRX" width="960" height="1200" fetchpriority="high">
-      <figcaption><div><strong>S4NTRX</strong><span>Cybersecurity researcher</span></div><svg class="icon"><use href="#i-lock"/></svg></figcaption>
+      <figcaption><strong>S4NTRX</strong><span>@s4ntrx · BASTION HOST</span><small>Cybersecurity · Threat Research · Tooling · Education</small></figcaption>
     </figure>
   </div>
 
-  <ul class="wrap stats" style="padding:0">
-    <li><b>235</b><span>GitHub followers</span></li>
-    <li><b>172</b><span>Stars earned</span></li>
-    <li><b>11</b><span>Public repositories</span></li>
-    <li><b>5+</b><span>Security domains</span></li>
+  <ul class="wrap stats">
+    <li><b>11</b><span>Public Repositories</span></li>
+    <li><b>235</b><span>GitHub Followers</span></li>
+    <li><b>172</b><span>Stars Earned</span></li>
+    <li><b>5+</b><span>Security Domains</span></li>
   </ul>
 
   <section id="work" class="wrap">
-    <div class="heading">
-      <h2>Selected work</h2>
-      <p>Open-source projects covering threat education, reconnaissance, incident response and awareness training.</p>
-    </div>
+    <header class="section-head"><p class="eyebrow">Selected work</p><h2>Projects from the front line.</h2><p class="section-desc">Live repositories pulled from the S4NTRX GitHub account — detection guides, education platforms, reconnaissance tooling and offensive-security research.</p></header>
     <div class="projects">
-      <a class="project" href="https://github.com/s4ntrx/Cybersecurity-Threats-Guide">
-        <header><svg class="icon"><use href="#i-book"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
-        <h3>Cybersecurity Threats Guide</h3>
-        <p>Documents major threats and vulnerabilities, with detection scripts and prevention strategies for each attack class.</p>
-        <footer><span><svg class="icon"><use href="#i-star"/></svg>31</span><span><svg class="icon"><use href="#i-fork"/></svg>2</span><span class="tag">Python</span></footer>
-      </a>
-      <a class="project" href="https://github.com/s4ntrx/S4ntrx-Bot">
-        <header><svg class="icon"><use href="#i-code"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
-        <h3>S4ntrx-Bot</h3>
-        <p>Multi-user Flask chatbot that teaches security fundamentals, built for classroom deployment.</p>
-        <footer><span><svg class="icon"><use href="#i-star"/></svg>29</span><span><svg class="icon"><use href="#i-fork"/></svg>1</span><span class="tag">Python</span></footer>
-      </a>
-      <a class="project" href="https://github.com/s4ntrx/My-Windows-Cheat-sheet">
-        <header><svg class="icon"><use href="#i-win"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
-        <h3>Windows Cheat Sheet</h3>
-        <p>Essential Windows commands in 8 categories, covering administration, security auditing and incident response.</p>
-        <footer><span><svg class="icon"><use href="#i-star"/></svg>24</span><span><svg class="icon"><use href="#i-fork"/></svg>2</span><span class="tag">PowerShell</span></footer>
-      </a>
-      <a class="project" href="https://github.com/s4ntrx/MUST-Campus">
-        <header><svg class="icon"><use href="#i-server"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
-        <h3>MUST Campus</h3>
-        <p>Campus web platform deployed to production, focused on clean UI and reliable delivery.</p>
-        <footer><span><svg class="icon"><use href="#i-star"/></svg>23</span><span><svg class="icon"><use href="#i-fork"/></svg>0</span><span class="tag">HTML</span></footer>
-      </a>
-      <a class="project" href="https://github.com/s4ntrx/Dark-Web">
-        <header><svg class="icon"><use href="#i-eye"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
-        <h3>Dark Web</h3>
-        <p>Toolkit and notes for safely researching hidden services and threat-actor infrastructure.</p>
-        <footer><span><svg class="icon"><use href="#i-star"/></svg>16</span><span><svg class="icon"><use href="#i-fork"/></svg>0</span><span class="tag">Shell</span></footer>
-      </a>
-      <a class="project" href="https://github.com/s4ntrx/RenPhisher">
-        <header><svg class="icon"><use href="#i-hook"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
-        <h3>RenPhisher</h3>
-        <p>Awareness tool that shows how cloned sites harvest credentials, so users learn to spot social engineering.</p>
-        <footer><span><svg class="icon"><use href="#i-star"/></svg>6</span><span><svg class="icon"><use href="#i-fork"/></svg>0</span><span class="tag">HTML</span></footer>
-      </a>
+      <article class="project"><span class="tile green"><svg class="icon "><use href="#i-book"/></svg></span><h3><a href="https://github.com/s4ntrx/Cybersecurity-Threats-Guide" target="_blank" rel="noopener">Cybersecurity-Threats-Guide</a></h3><p>Comprehensive educational resource documenting major threats and vulnerabilities — with detection scripts and prevention strategies for each attack class.</p><span class="lang ">Python</span><span class="repo-stats"><span class="star"><svg class="icon fill"><use href="#i-star"/></svg>31</span><span class="fork"><svg class="icon "><use href="#i-fork"/></svg>2</span></span></article>
+      <article class="project"><span class="tile green"><svg class="icon "><use href="#i-robot"/></svg></span><span class="chip">MIT LICENSE</span><h3><a href="https://github.com/s4ntrx/S4ntrx-Bot" target="_blank" rel="noopener">S4ntrx-Bot</a></h3><p>Multi-user cybersecurity education chatbot built with Flask — designed for classroom deployment to train students on security fundamentals interactively.</p><span class="lang ">Python</span><span class="repo-stats"><span class="star"><svg class="icon fill"><use href="#i-star"/></svg>29</span><span class="fork"><svg class="icon "><use href="#i-fork"/></svg>1</span></span></article>
+      <article class="project"><span class="tile green"><svg class="icon "><use href="#i-monitor"/></svg></span><h3><a href="https://github.com/s4ntrx/My-Windows-Cheat-sheet" target="_blank" rel="noopener">My-Windows-Cheat-sheet</a></h3><p>Essential Windows commands organized into 8 functional categories — covering system administration, security auditing and incident response workflows.</p><span class="lang red">Batch / PowerShell</span><span class="repo-stats"><span class="star"><svg class="icon fill"><use href="#i-star"/></svg>24</span><span class="fork"><svg class="icon "><use href="#i-fork"/></svg>2</span></span></article>
+      <article class="project"><span class="tile green"><svg class="icon "><use href="#i-globe"/></svg></span><a class="chip" href="https://must-campus.vercel.app" target="_blank" rel="noopener">LIVE SITE</a><h3><a href="https://github.com/s4ntrx/MUST-Campus" target="_blank" rel="noopener">MUST-Campus</a></h3><p>Campus web platform for MUST — deployed to production at must-campus.vercel.app with a focus on clean UI and reliable delivery.</p><span class="lang red">HTML</span><span class="repo-stats"><span class="star"><svg class="icon fill"><use href="#i-star"/></svg>23</span><span class="fork"><svg class="icon "><use href="#i-fork"/></svg>0</span></span></article>
+      <article class="project"><span class="tile green"><svg class="icon "><use href="#i-search"/></svg></span><h3><a href="https://github.com/s4ntrx/Dark-Web" target="_blank" rel="noopener">Dark-Web</a></h3><p>Toolkit for exploring and researching the dark web safely — reconnaissance utilities for analysts studying hidden services and threat actor infrastructure.</p><span class="lang ">Shell / Docs</span><span class="repo-stats"><span class="star"><svg class="icon fill"><use href="#i-star"/></svg>16</span><span class="fork"><svg class="icon "><use href="#i-fork"/></svg>0</span></span></article>
+      <article class="project"><span class="tile green"><svg class="icon "><use href="#i-link"/></svg></span><h3><a href="https://github.com/s4ntrx/RenPhisher" target="_blank" rel="noopener">RenPhisher</a></h3><p>Phishing-awareness research tool that demonstrates how cloned sites harvest credentials — built to educate users on recognizing social-engineering attacks.</p><span class="lang red">HTML</span><span class="repo-stats"><span class="star"><svg class="icon fill"><use href="#i-star"/></svg>6</span><span class="fork"><svg class="icon "><use href="#i-fork"/></svg>0</span></span></article>
     </div>
   </section>
 
   <section id="skills" class="wrap">
-    <div class="heading">
-      <h2>Expertise</h2>
-      <p>What the repositories above demonstrate.</p>
-    </div>
+    <header class="section-head"><p class="eyebrow">Capabilities</p><h2>Arsenal &amp; expertise.</h2><p class="section-desc">Skills demonstrated across the S4NTRX repositories — from detection scripting to adversarial simulation and security education.</p></header>
     <div class="skills">
-      <article><svg class="icon"><use href="#i-code"/></svg><h3>Security scripting</h3><p>Python detection and prevention scripts, plus automation tooling.</p></article>
-      <article><svg class="icon"><use href="#i-win"/></svg><h3>Windows incident response</h3><p>Security auditing and response workflows in PowerShell and CMD.</p></article>
-      <article><svg class="icon"><use href="#i-net"/></svg><h3>Network analysis</h3><p>Traffic interception with mitmproxy, reconnaissance and network utilities.</p></article>
-      <article><svg class="icon"><use href="#i-eye"/></svg><h3>Threat intelligence</h3><p>Dark-web research, vulnerability analysis and adversary tradecraft.</p></article>
-      <article><svg class="icon"><use href="#i-hook"/></svg><h3>Social engineering simulation</h3><p>Phishing-awareness tooling built for defensive training.</p></article>
-      <article><svg class="icon"><use href="#i-server"/></svg><h3>Flask applications</h3><p>Multi-user education platforms and chatbot backends.</p></article>
-      <article><svg class="icon"><use href="#i-lock"/></svg><h3>Privacy and OPSEC</h3><p>Hardening tooling and curated privacy-focused software stacks.</p></article>
-      <article><svg class="icon"><use href="#i-book"/></svg><h3>Security education</h3><p>Classroom-ready curricula, threat guides and training chatbots.</p></article>
+      <article class="skill red"><span class="tile red"><svg class="icon "><use href="#i-code"/></svg></span><h3>Python Security Scripting</h3><p>Detection & prevention scripts for threat classes, automation tooling.</p><span class="meter" style="--level:92%"><i></i></span><span class="level">PROFICIENCY 92%</span></article>
+      <article class="skill green"><span class="tile green"><svg class="icon "><use href="#i-monitor"/></svg></span><h3>Windows IR & SysAdmin</h3><p>Security auditing, incident response, PowerShell & CMD workflows.</p><span class="meter" style="--level:88%"><i></i></span><span class="level">PROFICIENCY 88%</span></article>
+      <article class="skill red"><span class="tile red"><svg class="icon "><use href="#i-globe"/></svg></span><h3>Network Analysis</h3><p>Traffic interception (mitmproxy), network utilities & reconnaissance.</p><span class="meter" style="--level:85%"><i></i></span><span class="level">PROFICIENCY 85%</span></article>
+      <article class="skill green"><span class="tile green"><svg class="icon "><use href="#i-shield"/></svg></span><h3>Threat Intelligence</h3><p>Dark-web exploration, vulnerability research, adversary tradecraft.</p><span class="meter" style="--level:90%"><i></i></span><span class="level">PROFICIENCY 90%</span></article>
+      <article class="skill red"><span class="tile red"><svg class="icon "><use href="#i-link"/></svg></span><h3>Social Engineering Sim</h3><p>Phishing campaigns & awareness tooling (RenPhisher) for defense training.</p><span class="meter" style="--level:80%"><i></i></span><span class="level">PROFICIENCY 80%</span></article>
+      <article class="skill green"><span class="tile green"><svg class="icon "><use href="#i-bulb"/></svg></span><h3>Flask App Development</h3><p>Multi-user security education platforms and chatbot backends.</p><span class="meter" style="--level:86%"><i></i></span><span class="level">PROFICIENCY 86%</span></article>
+      <article class="skill red"><span class="tile red"><svg class="icon "><use href="#i-target"/></svg></span><h3>Privacy & OPSEC</h3><p>Privacy-hardening tooling, curated security software stacks (awesome-privacy).</p><span class="meter" style="--level:84%"><i></i></span><span class="level">PROFICIENCY 84%</span></article>
+      <article class="skill green"><span class="tile green"><svg class="icon "><use href="#i-cap"/></svg></span><h3>Security Education</h3><p>Classroom-ready curricula, threat guides and training chatbots.</p><span class="meter" style="--level:91%"><i></i></span><span class="level">PROFICIENCY 91%</span></article>
     </div>
   </section>
 
   <section id="map" class="wrap">
-    <div class="heading">
-      <h2>Global cyber attack map</h2>
-      <p>Simulated attack traffic with Nairobi as the origin. The data is generated in your browser and is not real threat intelligence.</p>
-    </div>
+    <header class="section-head"><p class="eyebrow">Threat intelligence</p><h2>Global Cyber Attack Map</h2><p class="section-desc">Simulated attack traffic with Nairobi as the origin. The data is generated in your browser and is not real threat intelligence.</p></header>
     <figure class="map-panel">
       <canvas id="attack-map" role="img" aria-label="Animated globe showing simulated attacks travelling to and from Nairobi"></canvas>
       <figcaption class="map-legend">
@@ -262,10 +240,7 @@ footer.site{margin-top:var(--space);padding-block:40px;border-top:1px solid var(
   </section>
 
   <section id="lab" class="wrap">
-    <div class="heading">
-      <h2>Live security tools</h2>
-      <p>Four working tools that run in your browser. The sniffer and scanner are simulations: no real traffic is captured and no network is probed.</p>
-    </div>
+    <header class="section-head"><p class="eyebrow">Security lab</p><h2>Live Security Tools</h2><p class="section-desc">Four working tools that run in your browser. The sniffer and scanner are simulations: no real traffic is captured and no network is probed.</p></header>
     <div class="lab">
       <div class="lab-tabs" role="tablist" aria-label="Security tools">
         <button role="tab" id="tab-sniffer" aria-controls="panel-sniffer" aria-selected="true"><svg class="icon"><use href="#i-net"/></svg>Packet sniffer</button>
@@ -331,11 +306,12 @@ footer.site{margin-top:var(--space);padding-block:40px;border-top:1px solid var(
 
   <section id="contact" class="wrap">
     <div class="contact">
-      <h2>Need a security tool built or a team trained?</h2>
-      <p>Threat research, defensive tooling and security education. Reach out through GitHub or X.</p>
+      <h2>Ready to build and defend the future <em>together?</em></h2>
+      <p>Whether it is threat research, defensive tooling or security education — let us connect and create something amazing.</p>
       <div class="actions">
-        <a class="btn" href="https://github.com/s4ntrx"><svg class="icon"><use href="#i-github"/></svg>@s4ntrx</a>
-        <a class="btn btn-outline" href="https://x.com/BdMutant"><svg class="icon"><use href="#i-x"/></svg>@BdMutant</a>
+        <a class="btn" href="https://github.com/s4ntrx" target="_blank" rel="noopener"><svg class="icon "><use href="#i-github"/></svg>GitHub · @s4ntrx</a>
+        <a class="btn" href="https://x.com/BdMutant" target="_blank" rel="noopener"><svg class="icon "><use href="#i-x"/></svg>X · @BdMutant</a>
+        <a class="btn" href="https://github.com/s4ntrx?tab=repositories" target="_blank" rel="noopener"><svg class="icon "><use href="#i-play"/></svg>All Repositories</a>
       </div>
     </div>
   </section>
@@ -350,8 +326,9 @@ footer.site{margin-top:var(--space);padding-block:40px;border-top:1px solid var(
     <li><a href="https://ctfroom.com" target="_blank" rel="noopener"><svg class="icon"><use href="#i-target"/></svg>CTFroom</a></li>
     <li><a href="https://cyberdefenders.org" target="_blank" rel="noopener"><svg class="icon"><use href="#i-shield"/></svg>CyberDefenders</a></li>
   </ul>
-  <p>© 2026 S4NTRX. Built for defense.</p>
+  <p><span class="site-name">S4NTRX — BASTION HOST</span> · © 2026 · Built for defense.</p>
 </footer>
+
 <script>
 const byId=id=>document.getElementById(id);
 const randomInt=max=>Math.floor(Math.random()*max);
@@ -373,7 +350,7 @@ const protocolTable={
   ICMP:['Echo (ping) request','Echo (ping) reply','Destination unreachable'],
   ARP:['Who has 192.168.1.1? Tell 192.168.1.24','192.168.1.1 is at 3c:52:82:aa:10:f4']
 };
-const protocolColors={TCP:'#22c55e',HTTPS:'#4ade80',UDP:'#15803d',DNS:'#bbf7d0',ICMP:'#ef4444',ARP:'#fca5a5'};
+const protocolColors={TCP:'#10e56b',HTTPS:'#5af59b',UDP:'#0a9d4d',DNS:'#c8ffe0',ICMP:'#ff2d2d',ARP:'#ff8a8a'};
 const capture={timer:null,count:0,bytes:0,perProtocol:{}};
 const localIp=()=>'192.168.1.'+(2+randomInt(60));
 const publicIp=()=>[pick([34,52,104,140,151,185]),randomInt(256),randomInt(256),1+randomInt(254)].join('.');
@@ -487,28 +464,28 @@ function traceLine(vectorAt,count){
 function drawGlobe(){
   const{width,height,radius}=mapState,centerX=width/2,centerY=height/2;
   mapContext.clearRect(0,0,width,height);
-  mapContext.fillStyle='rgba(34,197,94,.05)';mapContext.beginPath();mapContext.arc(centerX,centerY,radius*1.3,0,7);mapContext.fill();
-  mapContext.fillStyle='#050a07';mapContext.strokeStyle='rgba(34,197,94,.55)';mapContext.lineWidth=1.5;
+  mapContext.fillStyle='rgba(16,229,107,.05)';mapContext.beginPath();mapContext.arc(centerX,centerY,radius*1.3,0,7);mapContext.fill();
+  mapContext.fillStyle='#050a07';mapContext.strokeStyle='rgba(16,229,107,.55)';mapContext.lineWidth=1.5;
   mapContext.beginPath();mapContext.arc(centerX,centerY,radius,0,7);mapContext.fill();mapContext.stroke();
-  mapContext.strokeStyle='rgba(34,197,94,.16)';mapContext.lineWidth=1;
+  mapContext.strokeStyle='rgba(16,229,107,.16)';mapContext.lineWidth=1;
   for(let lat=-60;lat<=60;lat+=30)traceLine(index=>toVector(lat,index*6-180),61);
   for(let lon=-180;lon<180;lon+=30)traceLine(index=>toVector(index*6-90,lon),31);
 }
 function drawCities(time){
-  mapContext.font='11px ui-monospace,Menlo,Consolas,monospace';
+  mapContext.font='11px JetBrains Mono,ui-monospace,Menlo,Consolas,monospace';
   for(const[name,coords]of Object.entries(mapCities)){
     const point=projectVector(toVector(...coords));
     if(!point.visible)continue;
     const isOrigin=name==='Nairobi';
-    if(isOrigin){mapContext.strokeStyle='rgba(34,197,94,.5)';mapContext.beginPath();mapContext.arc(point.x,point.y,9+(time/70)%14,0,7);mapContext.stroke()}
-    mapContext.fillStyle=isOrigin?'#22c55e':'#86efac';
+    if(isOrigin){mapContext.strokeStyle='rgba(16,229,107,.5)';mapContext.beginPath();mapContext.arc(point.x,point.y,9+(time/70)%14,0,7);mapContext.stroke()}
+    mapContext.fillStyle=isOrigin?'#10e56b':'#8dffc0';
     mapContext.beginPath();mapContext.arc(point.x,point.y,isOrigin?6:3.5,0,7);mapContext.fill();
-    mapContext.fillStyle='#d1fae5';mapContext.fillText(name,point.x+10,name==='Paris'?point.y+14:point.y-8);
+    mapContext.fillStyle='#d6ffe8';mapContext.fillText(name,point.x+10,name==='Paris'?point.y+14:point.y-8);
   }
 }
 function spawnAttack(time){
   const city=pick(Object.keys(mapCities).filter(name=>name!=='Nairobi')),isIncoming=Math.random()<.7;
-  mapState.attacks.push({from:isIncoming?mapCities[city]:mapCities.Nairobi,to:isIncoming?mapCities.Nairobi:mapCities[city],color:isIncoming?'#ef4444':'#22c55e',start:time,duration:1600+randomInt(900)});
+  mapState.attacks.push({from:isIncoming?mapCities[city]:mapCities.Nairobi,to:isIncoming?mapCities.Nairobi:mapCities[city],color:isIncoming?'#ff2d2d':'#10e56b',start:time,duration:1600+randomInt(900)});
   isIncoming?mapState.incoming++:mapState.outgoing++;
   byId('map-incoming').textContent=mapState.incoming;byId('map-outgoing').textContent=mapState.outgoing;
 }
@@ -548,7 +525,26 @@ new IntersectionObserver(([entry])=>{
   mapVisible=entry.isIntersecting&&!reducedMotion;
   if(mapVisible&&!mapFrame)mapFrame=requestAnimationFrame(renderMap);
 }).observe(mapCanvas);
+
+const terminalCommands=['./darkweb_recon --safe','python3 threat_scan.py --report','.\\ir_triage.ps1 -Collect','mitmproxy --mode transparent'];
+const terminalOutput=byId('terminal-command');
+let commandIndex=0;
+function typeTerminal(){
+  const command=terminalCommands[commandIndex%terminalCommands.length];
+  let length=0;
+  const erase=()=>{
+    terminalOutput.textContent=command.slice(0,--length);
+    if(length>0)return setTimeout(erase,28);
+    commandIndex++;setTimeout(typeTerminal,400);
+  };
+  const type=()=>{
+    terminalOutput.textContent=command.slice(0,++length);
+    if(length<command.length)return setTimeout(type,70);
+    setTimeout(erase,1800);
+  };
+  type();
+}
+if(!reducedMotion)typeTerminal();
 </script>
 </body>
-
 </html>
