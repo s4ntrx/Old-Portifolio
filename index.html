@@ -1,1683 +1,554 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Peter Kariuki | Cybersecurity Portfolio</title>
-<meta name="description" content="Peter Kariuki — CS Student at Meru University. Network Security, Privacy, Ethical Hacking."/>
-<meta property="og:title" content="Peter Kariuki | Cybersecurity Portfolio"/>
-<meta property="og:image" content="https://avatars.githubusercontent.com/Bd-Mutant7"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050706'/%3E%3Crect x='3' y='3' width='58' height='58' rx='12' fill='none' stroke='%2322c55e' stroke-width='3'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='monospace' font-weight='700' font-size='28' fill='%2322c55e'%3ES4%3C/text%3E%3C/svg%3E">
+<title>S4NTRX — Cybersecurity Researcher & Tool Builder</title>
+<meta name="description" content="S4NTRX builds threat-detection tooling, incident-response references and security education platforms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#020408; --bg2:#050d14; --card:#0a1628; --card2:#0f1f3a;
-  --green:#00ff88; --cyan:#00d4ff; --blue:#0057ff; --red:#ff2244;
-  --t1:#e0f0ff; --t2:#6b8fa8; --t3:#3a5a7a;
-  --bdr:rgba(0,212,255,0.14);
-  --gg:0 0 18px rgba(0,255,136,0.28); --gc:0 0 18px rgba(0,212,255,0.28);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--t1);overflow-x:hidden;line-height:1.6}
-::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:2px}
-
-/* progress */
-#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--green),var(--cyan));z-index:9999;width:0%;transition:width .1s}
-
-/* matrix */
-#mx{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.04;pointer-events:none}
-
-/* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:rgba(2,4,8,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr)}
-.logo{font-family:'Orbitron',monospace;font-size:.95rem;font-weight:700;color:var(--cyan);text-decoration:none;letter-spacing:2px}
-.logo span{color:var(--green)}
-.nav-links{display:flex;gap:1.5rem;list-style:none}
-.nav-links a{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--t2);text-decoration:none;letter-spacing:1px;transition:color .2s}
-.nav-links a:hover{color:var(--green)}
-.nav-r{display:flex;align-items:center;gap:.8rem}
-.online{display:flex;align-items:center;gap:.4rem;font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--green)}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 6px var(--green)}50%{box-shadow:none}}
-
-/* hero */
-#hero{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 5% 40px}
-.hero-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:1180px;width:100%;align-items:center}
-.term-box{background:rgba(3,10,18,.97);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;box-shadow:0 0 50px rgba(0,212,255,.07),0 20px 60px rgba(0,0,0,.6)}
-.term-bar{background:#0c1926;padding:10px 14px;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--bdr)}
-.td{width:11px;height:11px;border-radius:50%}.td1{background:#ff5f57}.td2{background:#febc2e}.td3{background:#28c840}
-.term-title{margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--t3)}
-#term-out{padding:.8rem 1.2rem;height:290px;overflow-y:auto;font-family:'Share Tech Mono',monospace;font-size:.75rem;line-height:1.95}
-#term-out::-webkit-scrollbar{width:2px}
-.term-in-row{display:flex;align-items:center;gap:.5rem;padding:.4rem 1.2rem .9rem;border-top:1px solid var(--bdr)}
-.pr{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--green);white-space:nowrap}
-#term-in{flex:1;background:transparent;border:none;outline:none;color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:.75rem;caret-color:var(--green)}
-.g{color:var(--green)}.c{color:var(--cyan)}.y{color:#ffe066}.d{color:var(--t3)}.r{color:var(--red)}.w{color:var(--t1)}
-
-.hero-right{display:flex;flex-direction:column;gap:1.3rem}
-.badge-row{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--green);letter-spacing:3px;display:flex;align-items:center;gap:.5rem}
-.bl{height:1px;width:36px;background:var(--green);opacity:.5}
-h1{font-family:'Orbitron',monospace;font-size:clamp(1.7rem,3.2vw,2.8rem);font-weight:900;line-height:1.1}
-h1 span{color:var(--cyan)}
-.sub{font-size:.95rem;color:var(--t2)}
-.univ{display:flex;align-items:center;gap:.4rem;font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--cyan)}
-.tags{display:flex;flex-wrap:wrap;gap:.5rem}
-.tag{padding:4px 11px;border:1px solid var(--bdr);border-radius:3px;font-family:'Share Tech Mono',monospace;font-size:.66rem;color:var(--t2);transition:all .2s}
-.tag:hover{border-color:var(--cyan);color:var(--cyan)}
-.btns{display:flex;gap:.8rem;flex-wrap:wrap}
-.btn-g{padding:10px 24px;background:transparent;border:1px solid var(--green);color:var(--green);font-family:'Share Tech Mono',monospace;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:3px;transition:all .25s;position:relative;overflow:hidden}
-.btn-g::before{content:'';position:absolute;inset:0;background:var(--green);transform:translateX(-100%);transition:transform .25s;z-index:-1}
-.btn-g:hover{color:var(--bg);box-shadow:var(--gg)}.btn-g:hover::before{transform:translateX(0)}
-.btn-o{padding:10px 24px;background:transparent;border:1px solid var(--bdr);color:var(--t2);font-family:'Share Tech Mono',monospace;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:3px;transition:all .25s}
-.btn-o:hover{border-color:var(--cyan);color:var(--cyan)}
-
-/* sections */
-section{position:relative;z-index:2;padding:76px 5%}
-.sh{text-align:center;margin-bottom:3rem}
-.st{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--green);letter-spacing:4px;text-transform:uppercase;margin-bottom:.5rem;display:flex;align-items:center;justify-content:center;gap:.8rem}
-.st::before,.st::after{content:'';flex:1;max-width:50px;height:1px;background:linear-gradient(to right,transparent,var(--green))}
-.st::after{background:linear-gradient(to left,transparent,var(--green))}
-.stitle{font-family:'Orbitron',monospace;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:700;color:var(--t1);margin-bottom:.4rem}
-.ssub{font-size:.93rem;color:var(--t2);max-width:480px;margin:0 auto}
-.divider{position:relative;z-index:2;display:flex;align-items:center;gap:.8rem;padding:0 5%;opacity:.35}
-.dl{flex:1;height:1px;background:var(--bdr)}
-.di{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--t3)}
-
-/* profile */
-#profile{z-index:2;padding:50px 5%;display:flex;justify-content:center}
-.p-card{display:flex;align-items:center;gap:2.5rem;max-width:940px;width:100%;background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:2.2rem;box-shadow:0 0 35px rgba(0,212,255,.05)}
-.av-wrap{position:relative;flex-shrink:0}
-.av-ring{position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(var(--green),var(--cyan),var(--blue),var(--green));animation:spin 4s linear infinite;z-index:-1}
-@keyframes spin{to{transform:rotate(360deg)}}
-.av{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--bg);display:block;background:#0a1628}
-.av-online{position:absolute;bottom:5px;right:5px;width:16px;height:16px;border-radius:50%;background:var(--green);border:2px solid var(--bg);box-shadow:0 0 7px var(--green)}
-.p-info h2{font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:700;color:var(--t1);margin-bottom:.2rem}
-.p-handle{font-family:'Share Tech Mono',monospace;font-size:.8rem;color:var(--cyan);margin-bottom:.25rem}
-.p-univ{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--green);margin-bottom:.7rem;display:flex;align-items:center;gap:.35rem}
-.p-bio{font-size:.92rem;color:var(--t2);margin-bottom:1rem;max-width:500px}
-.p-stats{display:flex;gap:1.8rem}
-.ps .n{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:700;color:var(--green);display:block}
-.ps .l{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
-
-/* cards */
-.card{background:var(--card);border:1px solid var(--bdr);border-radius:7px;padding:1.4rem;transition:all .3s;position:relative;overflow:hidden}
-.card:hover{border-color:rgba(0,212,255,.32);background:var(--card2);transform:translateY(-3px);box-shadow:0 10px 36px rgba(0,0,0,.4),var(--gc)}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:translateX(-100%);transition:transform .5s}
-.card:hover::before{transform:translateX(100%)}
-
-/* projects */
-.proj-controls{display:flex;flex-wrap:wrap;gap:.8rem;max-width:1180px;margin:0 auto 2rem;align-items:center;justify-content:space-between}
-.fg,.sg{display:flex;gap:.4rem;flex-wrap:wrap}
-.fb,.sb{padding:5px 13px;background:transparent;border:1px solid var(--bdr);color:var(--t2);font-family:'Share Tech Mono',monospace;font-size:.66rem;letter-spacing:1px;cursor:pointer;border-radius:3px;transition:all .2s}
-.fb.on,.sb.on,.fb:hover,.sb:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.06)}
-.sl{font-family:'Share Tech Mono',monospace;font-size:.64rem;color:var(--t3)}
-.api-s{font-family:'Share Tech Mono',monospace;font-size:.66rem;color:var(--t3);display:flex;align-items:center;gap:.35rem}
-.api-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
-
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.3rem;max-width:1180px;margin:0 auto 2.5rem}
-.all-repos{max-width:1180px;margin:0 auto}
-.cat-group{margin-bottom:2.5rem}
-.cat-hd{font-family:'Orbitron',monospace;font-size:.82rem;font-weight:700;color:var(--cyan);margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem;padding-bottom:.5rem;border-bottom:1px solid var(--bdr)}
-.repo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.9rem}
-.pc{text-decoration:none;color:inherit;display:block}
-.pc.feat::after{content:'★ FEATURED';position:absolute;top:10px;right:10px;font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--green);border:1px solid rgba(0,255,136,.3);padding:2px 5px;border-radius:2px}
-.p-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.75rem}
-.ico{width:36px;height:36px;border-radius:5px;background:rgba(0,212,255,.07);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
-.ico img{width:20px;height:20px;object-fit:contain}
-.ico i{font-size:.95rem;color:var(--cyan)}
-.bx{font-family:'Share Tech Mono',monospace;font-size:.58rem;padding:3px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:1px}
-.bs{background:rgba(255,34,68,.1);color:var(--red);border:1px solid rgba(255,34,68,.25)}
-.bp{background:rgba(0,255,136,.07);color:var(--green);border:1px solid rgba(0,255,136,.2)}
-.bn{background:rgba(0,212,255,.07);color:var(--cyan);border:1px solid rgba(0,212,255,.2)}
-.ba{background:rgba(0,87,255,.1);color:#6699ff;border:1px solid rgba(0,87,255,.25)}
-.bt{background:rgba(255,224,102,.07);color:#ffe066;border:1px solid rgba(255,224,102,.2)}
-.be{background:rgba(150,100,255,.08);color:#cc99ff;border:1px solid rgba(150,100,255,.22)}
-.pn{font-family:'Orbitron',monospace;font-size:.8rem;font-weight:700;color:var(--t1);margin-bottom:.35rem}
-.pd{font-size:.83rem;color:var(--t2);line-height:1.5;margin-bottom:.9rem}
-.pf{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem}
-.pm{display:flex;align-items:center;gap:.7rem}
-.pl{display:flex;align-items:center;gap:.35rem;font-family:'Share Tech Mono',monospace;font-size:.63rem;color:var(--t3)}
-.ld{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.ps2{display:flex;align-items:center;gap:.3rem;font-family:'Share Tech Mono',monospace;font-size:.63rem;color:#ffe066}
-.pu{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--t3)}
-.pvl{font-family:'Share Tech Mono',monospace;font-size:.63rem;color:var(--cyan);opacity:0;transition:opacity .2s}
-.pc:hover .pvl{opacity:1}
-
-/* skills */
-.sk-layout{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:1080px;margin:0 auto;align-items:start}
-.radar-box{background:var(--card);border:1px solid var(--bdr);border-radius:7px;padding:1.4rem}
-.radar-lbl{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--green);letter-spacing:2px;margin-bottom:1rem;text-align:center}
-#radar{display:block;width:100%;max-width:320px;margin:0 auto}
-.sk-cats{display:flex;flex-direction:column;gap:1.5rem}
-.sk-cat{background:var(--card);border:1px solid var(--bdr);border-radius:7px;padding:1.2rem}
-.sk-ch{font-family:'Orbitron',monospace;font-size:.76rem;font-weight:700;color:var(--cyan);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
-.sk-list{display:flex;flex-direction:column;gap:.65rem}
-.sk-row{display:flex;align-items:center;gap:.7rem}
-.sk-ic{width:26px;height:26px;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(0,212,255,.06);border:1px solid var(--bdr);flex-shrink:0}
-.sk-ic img{width:16px;height:16px;object-fit:contain}
-.sk-ic i{font-size:.8rem;color:var(--cyan)}
-.sk-txt{flex:1}
-.sk-n{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--t1);display:block}
-.sk-bw{height:3px;background:rgba(0,212,255,.1);border-radius:2px;margin-top:4px;overflow:hidden}
-.sk-b{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--green),var(--cyan));width:0;transition:width 1.6s ease}
-.sk-p{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--green);width:28px;text-align:right;flex-shrink:0}
-
-/* certs */
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.3rem;max-width:1080px;margin:0 auto}
-.cert-card{background:var(--card);border:1px solid var(--bdr);border-radius:7px;padding:1.4rem;transition:all .3s;position:relative;overflow:hidden}
-.cert-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--green),var(--cyan))}
-.cert-card:hover{border-color:rgba(0,255,136,.28);transform:translateY(-3px);box-shadow:var(--gg)}
-.c-hd{display:flex;align-items:center;gap:.9rem;margin-bottom:.7rem}
-.c-logo{width:42px;height:42px;border-radius:7px;overflow:hidden;background:rgba(0,212,255,.06);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.c-logo img{width:28px;height:28px;object-fit:contain}
-.c-logo i{font-size:1.1rem;color:var(--cyan)}
-.c-org{font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--green);letter-spacing:2px;text-transform:uppercase}
-.c-name{font-family:'Orbitron',monospace;font-size:.8rem;font-weight:700;color:var(--t1);margin-bottom:.35rem;line-height:1.3}
-.c-date{font-family:'Share Tech Mono',monospace;font-size:.63rem;color:var(--t3)}
-.c-ft{display:flex;align-items:center;justify-content:space-between;margin-top:.7rem}
-.cst{padding:3px 9px;border-radius:3px;font-size:.6rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px}
-.ca{background:rgba(0,255,136,.07);color:var(--green);border:1px solid rgba(0,255,136,.2)}
-.ci{background:rgba(255,224,102,.07);color:#ffe066;border:1px solid rgba(255,224,102,.2)}
-.cv{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--cyan);text-decoration:none;opacity:.7}
-.cv:hover{opacity:1}
-
-/* stats boxes */
-.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem;max-width:860px;margin:0 auto 2.5rem}
-.sbox{background:var(--card);border:1px solid var(--bdr);border-radius:7px;padding:1.4rem;text-align:center;transition:all .3s}
-.sbox:hover{border-color:rgba(0,212,255,.28);box-shadow:var(--gc)}
-.snum{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:900;color:var(--cyan);display:block;margin-bottom:.25rem}
-.slbl{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:2px}
-
-/* contribution graph */
-.contrib-box{max-width:860px;margin:0 auto;background:var(--card);border:1px solid var(--bdr);border-radius:7px;padding:1.4rem}
-.contrib-lbl{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--green);letter-spacing:2px;margin-bottom:1rem}
-
-/* canvas boxes */
-.cvs-box{max-width:880px;margin:0 auto;border:1px solid var(--bdr);border-radius:7px;overflow:hidden;background:#020810;position:relative}
-#net-cvs{display:block;width:100%;height:360px}
-#globe-cvs{display:block;width:100%;height:420px}
-
-/* packet demo */
-.demo-box{max-width:880px;margin:0 auto;background:#020a12;border:1px solid var(--bdr);border-radius:7px;overflow:hidden}
-.demo-bar{background:#0a1628;padding:9px 14px;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--bdr)}
-.demo-ttl{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--t3);margin-left:auto}
-.demo-ctrls{display:flex;gap:.7rem;padding:.9rem 1.3rem;border-bottom:1px solid var(--bdr)}
-.cb{padding:5px 13px;background:transparent;cursor:pointer;border-radius:3px;font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:1px;transition:all .2s}
-.cs{border:1px solid var(--green);color:var(--green)}.cs:hover{background:rgba(0,255,136,.1)}
-.cx{border:1px solid var(--red);color:var(--red)}.cx:hover{background:rgba(255,34,68,.1)}
-.cc{border:1px solid var(--bdr);color:var(--t3)}.cc:hover{border-color:var(--t2);color:var(--t2)}
-.pkt-wrap{overflow:auto;max-height:320px}
-table{width:100%;border-collapse:collapse;font-family:'Share Tech Mono',monospace;font-size:.71rem}
-th{padding:7px 11px;text-align:left;color:var(--cyan);font-weight:normal;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--bdr);background:#030c15;position:sticky;top:0}
-td{padding:6px 11px;border-bottom:1px solid rgba(0,212,255,.05);color:var(--t2)}
-tr:hover td{background:rgba(0,212,255,.04);color:var(--t1)}
-.nr td{animation:rfl .4s ease}
-@keyframes rfl{from{background:rgba(0,255,136,.08)}to{background:transparent}}
-.tc{color:var(--cyan)}.tu{color:var(--green)}.th{color:#6699ff}.td2c{color:#ffe066}.ti{color:var(--red)}
-
-/* blog */
-.blog-ctrls{display:flex;gap:.7rem;margin-bottom:1.8rem;justify-content:center;flex-wrap:wrap}
-.bs2{background:rgba(0,212,255,.04);border:1px solid var(--bdr);border-radius:3px;padding:7px 12px;color:var(--t1);font-family:'Share Tech Mono',monospace;font-size:.74rem;outline:none;width:240px;transition:border-color .2s}
-.bs2:focus{border-color:var(--cyan)}.bs2::placeholder{color:var(--t3)}
-.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.3rem;max-width:1080px;margin:0 auto}
-.blog-card{background:var(--card);border:1px solid var(--bdr);border-radius:7px;padding:1.4rem;transition:all .3s;cursor:pointer}
-.blog-card:hover{border-color:rgba(0,212,255,.28);transform:translateY(-3px)}
-.btag{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:.7rem;display:block}
-.btitle{font-family:'Orbitron',monospace;font-size:.86rem;font-weight:700;color:var(--t1);margin-bottom:.55rem;line-height:1.4}
-.bex{font-size:.82rem;color:var(--t2);line-height:1.6;margin-bottom:.9rem}
-.bm{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--t3)}
-
-/* contact */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:860px;margin:0 auto;align-items:start}
-.clinks{display:flex;flex-direction:column;gap:.9rem}
-.clink{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;background:var(--card);border:1px solid var(--bdr);border-radius:6px;text-decoration:none;transition:all .25s}
-.clink:hover{border-color:var(--cyan);transform:translateX(4px)}
-.cli{width:34px;height:34px;border-radius:5px;background:rgba(0,212,255,.07);display:flex;align-items:center;justify-content:center;font-size:.88rem;color:var(--cyan);flex-shrink:0}
-.clt strong{display:block;font-size:.84rem;color:var(--t1)}
-.clt small{font-family:'Share Tech Mono',monospace;font-size:.64rem;color:var(--t3)}
-.cla{margin-left:auto;color:var(--t3);font-size:.78rem}
-.cform{display:flex;flex-direction:column;gap:.9rem}
-.fg2{display:flex;flex-direction:column;gap:.35rem}
-.fl{font-family:'Share Tech Mono',monospace;font-size:.66rem;color:var(--green);letter-spacing:1px}
-.fi,.ft{background:rgba(0,212,255,.04);border:1px solid var(--bdr);border-radius:4px;padding:9px 13px;color:var(--t1);font-family:'Share Tech Mono',monospace;font-size:.77rem;outline:none;transition:border-color .2s;resize:none}
-.fi:focus,.ft:focus{border-color:var(--cyan)}.fi::placeholder,.ft::placeholder{color:var(--t3)}
-
-/* footer */
-footer{position:relative;z-index:2;border-top:1px solid var(--bdr);padding:1.8rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
-.fb2{font-family:'Orbitron',monospace;font-size:.88rem;color:var(--cyan)}
-.fc{font-family:'Share Tech Mono',monospace;font-size:.66rem;color:var(--t3)}
-.fl2{display:flex;gap:1.3rem}
-.fl2 a{font-family:'Share Tech Mono',monospace;font-size:.66rem;color:var(--t3);text-decoration:none}
-.fl2 a:hover{color:var(--cyan)}
-
-/* AI bubble */
-#ai-bubble{position:fixed;bottom:26px;right:26px;z-index:10000;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-#ai-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--card),#0f2040);border:2px solid var(--cyan);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--gc);transition:all .3s;position:relative}
-#ai-btn:hover{transform:scale(1.1);box-shadow:0 0 28px rgba(0,212,255,.5)}
-#ai-btn i{font-size:1.2rem;color:var(--cyan)}
-.ai-notif{position:absolute;top:-3px;right:-3px;width:14px;height:14px;border-radius:50%;background:var(--green);border:2px solid var(--bg);animation:pulse 2s infinite}
-#ai-panel{width:340px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;overflow:hidden;box-shadow:0 20px 70px rgba(0,0,0,.7),var(--gc);display:none;flex-direction:column;max-height:500px}
-#ai-panel.open{display:flex}
-.ai-hd{padding:.85rem 1.1rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:.7rem;background:#0a1628}
-.ai-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--cyan));display:flex;align-items:center;justify-content:center}
-.ai-av i{font-size:.75rem;color:#020408}
-.ai-inf strong{display:block;font-family:'Orbitron',monospace;font-size:.7rem;color:var(--t1)}
-.ai-inf small{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--green)}
-.ai-x{margin-left:auto;background:transparent;border:none;color:var(--t3);cursor:pointer;font-size:.95rem;padding:3px;transition:color .2s}
-.ai-x:hover{color:var(--red)}
-.ai-msgs{flex:1;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.75rem;min-height:260px}
-.ai-msgs::-webkit-scrollbar{width:2px}
-.msg{display:flex;gap:.55rem;align-items:flex-start}
-.ma{flex-direction:row}.mu{flex-direction:row-reverse}
-.mav{width:24px;height:24px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.65rem}
-.ma .mav{background:linear-gradient(135deg,var(--green),var(--cyan))}
-.mu .mav{background:rgba(0,87,255,.3);border:1px solid rgba(0,87,255,.4)}
-.mb{max-width:80%;padding:.55rem .85rem;border-radius:5px;font-size:.78rem;line-height:1.55}
-.ma .mb{background:rgba(0,212,255,.06);border:1px solid var(--bdr);color:var(--t1)}
-.mu .mb{background:rgba(0,87,255,.14);border:1px solid rgba(0,87,255,.28);color:var(--t1)}
-.ai-quick{padding:.45rem .9rem;display:flex;flex-wrap:wrap;gap:.35rem;border-top:1px solid var(--bdr)}
-.aq{padding:3px 7px;background:transparent;border:1px solid var(--bdr);color:var(--t3);font-family:'Share Tech Mono',monospace;font-size:.6rem;cursor:pointer;border-radius:3px;transition:all .2s}
-.aq:hover{border-color:var(--cyan);color:var(--cyan)}
-.ai-in-row{padding:.75rem .9rem;border-top:1px solid var(--bdr);display:flex;gap:.55rem}
-.ai-in{flex:1;background:rgba(0,212,255,.04);border:1px solid var(--bdr);border-radius:4px;padding:7px 11px;color:var(--t1);font-family:'Share Tech Mono',monospace;font-size:.73rem;outline:none;transition:border-color .2s}
-.ai-in:focus{border-color:var(--cyan)}.ai-in::placeholder{color:var(--t3)}
-.ai-send{padding:7px 13px;background:transparent;border:1px solid var(--cyan);color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:.66rem;cursor:pointer;border-radius:4px;transition:all .2s}
-.ai-send:hover{background:rgba(0,212,255,.1)}
-
-/* resume modal */
-#rmod{display:none;position:fixed;inset:0;z-index:20000;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);align-items:center;justify-content:center}
-#rmod.show{display:flex}
-.rbox{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:1.8rem;max-width:480px;width:92%}
-.rbox h3{font-family:'Orbitron',monospace;font-size:.95rem;color:var(--t1);margin-bottom:.9rem}
-.rprev{background:#020810;border:1px solid var(--bdr);border-radius:4px;padding:.9rem;font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--t2);line-height:1.85;margin-bottom:1.1rem;max-height:210px;overflow-y:auto;white-space:pre}
-.ra{display:flex;gap:.7rem}
-.rdl{padding:9px 18px;background:transparent;border:1px solid var(--green);color:var(--green);font-family:'Share Tech Mono',monospace;font-size:.74rem;cursor:pointer;border-radius:3px;transition:all .25s;flex:1}
-.rdl:hover{background:rgba(0,255,136,.1)}
-.rcl{padding:9px 18px;background:transparent;border:1px solid var(--bdr);color:var(--t3);font-family:'Share Tech Mono',monospace;font-size:.74rem;cursor:pointer;border-radius:3px;transition:all .25s}
-.rcl:hover{border-color:var(--red);color:var(--red)}
-
-/* reveal */
-.rv{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
-.rv.on{opacity:1;transform:translateY(0)}
-
-/* ── SECURITY LAB TABS (added) ───────────────────────────────────────── */
-.lab-tab-row{display:flex;gap:.5rem;flex-wrap:wrap;max-width:880px;margin:0 auto 1.2rem}
-.lt{padding:6px 15px;background:transparent;border:1px solid var(--bdr);color:var(--t2);font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:1px;cursor:pointer;border-radius:3px;transition:all .2s}
-.lt:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.05)}
-.lt.lt-on{border-color:var(--green);color:var(--green);background:rgba(0,255,136,.07)}
-.lab-panel{display:none}
-.lab-panel.lp-on{display:block}
-/* lab inputs reuse .fi style */
-.lab-input{background:rgba(0,212,255,.04);border:1px solid var(--bdr);border-radius:4px;padding:9px 13px;color:var(--t1);font-family:'Share Tech Mono',monospace;font-size:.78rem;outline:none;transition:border-color .2s;width:100%}
-.lab-input:focus{border-color:var(--cyan)}.lab-input::placeholder{color:var(--t3)}
-/* port scanner grid */
-.port-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:.5rem;margin-top:.9rem}
-.port-cell{background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;padding:.5rem .4rem;text-align:center;font-family:'Share Tech Mono',monospace;transition:all .3s}
-.port-cell.psc-on{border-color:var(--green);color:var(--green);background:rgba(0,255,136,.06)}
-.port-cell.psc-off{color:var(--t3);border-color:rgba(0,212,255,.06)}
-.port-cell.psc-scan{animation:pscan .45s ease infinite alternate}
-@keyframes pscan{from{opacity:.25}to{opacity:.9}}
-.port-num{font-family:'Orbitron',monospace;font-size:.75rem;font-weight:700;display:block}
-.port-svc{font-size:.55rem;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;display:block}
-/* hash output */
-.hash-result-block{margin-bottom:.85rem}
-.hash-algo-lbl{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:.3rem}
-.hash-val{background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;padding:.55rem .9rem;font-family:'Share Tech Mono',monospace;font-size:.69rem;color:var(--t2);word-break:break-all;line-height:1.5}
-/* b64 toggle pair */
-.b64-tog-row{display:flex;gap:.5rem;margin-bottom:.9rem}
-/* ─────────────────────────────────────────────────────────────────────── */
-
-/* responsive */
-@media(max-width:880px){.hero-wrap{grid-template-columns:1fr;gap:1.8rem}.sk-layout{grid-template-columns:1fr}.stat-grid{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:1fr}.p-card{flex-direction:column;text-align:center}.p-stats{justify-content:center}.nav-links{display:none}#ai-panel{width:300px}}
-@media(max-width:500px){.stat-grid{grid-template-columns:1fr 1fr}}
+:root{color-scheme:dark;--bg:#050706;--danger:#ef4444;--surface:rgba(255,255,255,.05);--surface-strong:rgba(255,255,255,.09);--ink:#e8edf7;--muted:#9aa89f;--line:rgba(255,255,255,.11);--accent:#22c55e;--accent-soft:rgba(34,197,94,.14);--radius:16px;--space:clamp(64px,9vw,112px);--heading:"Space Grotesk",Inter,system-ui,sans-serif;--glass-blur:blur(20px) saturate(150%);--shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font:16px/1.65 Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+h1,h2,h3,.brand,.stats b,.lab-meters b{font-family:var(--heading)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{width:min(1160px,100% - 48px);margin-inline:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(5,7,6,.75);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-weight:700;font-size:19px;letter-spacing:-.02em}
+nav ul{display:flex;gap:32px;list-style:none;padding:0;font-size:15px;font-weight:500;color:var(--muted)}
+nav ul a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid var(--line);background:var(--surface);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px);background:var(--surface-strong)}
+.btn-primary{background:var(--accent);color:#04140a;border-color:var(--accent)}
+.btn-primary:hover{background:#4ade80;border-color:#4ade80}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,88px);align-items:center;padding-block:clamp(48px,7vw,96px)}
+.hero h1{font-size:clamp(56px,9vw,112px);line-height:1.04;letter-spacing:-.035em;font-weight:700;margin-bottom:24px}
+.hero p{font-size:19px;color:var(--muted);max-width:520px;margin-bottom:36px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.portrait{position:relative;aspect-ratio:4/5;border-radius:24px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--line)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.portrait figcaption{position:absolute;left:16px;right:16px;bottom:16px;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-radius:12px;background:rgba(5,7,6,.65);border:1px solid var(--line);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);font-size:14px}
+.portrait strong{display:block;font-size:16px}
+.portrait span{color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.stats li{list-style:none;padding:28px;border-left:1px solid var(--line)}
+.stats li:first-child{border-left:0}
+.stats b{display:block;font-size:34px;letter-spacing:-.03em;line-height:1.1}
+.stats b{color:var(--accent)}
+.stats span{color:var(--muted);font-size:14px}
+section{padding-top:var(--space)}
+.heading{max-width:640px;margin-bottom:48px}
+.heading h2{font-size:clamp(30px,4vw,44px);line-height:1.1;letter-spacing:-.03em;font-weight:700;margin-bottom:14px}
+.heading p{color:var(--muted);font-size:18px}
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.project{display:flex;flex-direction:column;gap:14px;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);transition:background .2s,border-color .2s}
+.project:hover{background:var(--surface-strong);border-color:rgba(34,197,94,.5)}
+.project header{all:unset;display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+.project h3{font-size:19px;letter-spacing:-.01em}
+.project p{color:var(--muted);font-size:15px;flex:1}
+.project footer{display:flex;gap:18px;align-items:center;font-size:13px;color:var(--muted);padding-top:14px;border-top:1px solid var(--line)}
+.project footer span{display:inline-flex;align-items:center;gap:6px}
+.tag{margin-left:auto;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.skills article{padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
+.skills .icon{width:26px;height:26px;color:var(--danger);margin-bottom:18px}
+.skills h3{font-size:17px;margin-bottom:8px}
+.skills p{color:var(--muted);font-size:14.5px}
+.contact{display:flex;flex-direction:column;align-items:flex-start;gap:20px;padding:clamp(32px,6vw,72px);background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);color:#fff;border-radius:24px}
+.contact h2{font-size:clamp(30px,4vw,48px);line-height:1.1;letter-spacing:-.03em;max-width:640px}
+.contact p{color:#b6bdcc;max-width:520px;font-size:18px}
+.contact .btn{background:var(--accent);color:#04140a;border-color:var(--accent)}
+.contact .btn:hover{background:#4ade80}
+.contact .btn-outline{background:transparent;color:#fff;border-color:var(--danger)}
+.contact .btn-outline:hover{background:rgba(239,68,68,.16)}
+footer.site{margin-top:var(--space);padding-block:40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:0;list-style:none}
+.badges a{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);color:var(--ink);font-weight:600;font-size:14px;transition:border-color .15s,color .15s}
+.badges a:hover{border-color:var(--accent);color:var(--accent)}
+.map-panel{position:relative;margin:0;border:1px solid var(--line);border-radius:24px;background:#000;box-shadow:var(--shadow);overflow:hidden}
+#attack-map{display:block;width:100%;height:clamp(380px,56vw,540px)}
+.map-legend{position:absolute;left:20px;bottom:16px;display:grid;gap:4px;font:12px ui-monospace,Menlo,Consolas,monospace}
+.map-legend span::before{content:"";display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:currentColor}
+.origin,.outgoing{color:var(--accent)}.incoming{color:var(--danger)}
+.map-legend b{margin-left:6px;color:#fff}
+.lab{background:rgba(255,255,255,.04);border:1px solid var(--line);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);color:#dbe4f3;border-radius:24px;padding:clamp(20px,4vw,40px);--lab-line:#1d2a22;--lab-text:#8fa396;--ok:#22c55e;--bad:#f43f5e;--warn:#fca5a5;--info:#86efac}
+.lab-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.lab-tabs button,.lab-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;border:1px solid var(--lab-line);background:transparent;color:var(--lab-text);font:600 14px Inter,sans-serif;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.lab-tabs button:hover,.lab-btn:hover:not(:disabled){color:#fff;border-color:#3a5446}
+.lab-tabs button[aria-selected=true]{background:var(--ok);border-color:var(--ok);color:#052e16}
+.lab-btn:disabled{opacity:.4;cursor:not-allowed}
+.lab-btn.go{color:var(--ok);border-color:#166534}
+.lab-btn.stop{color:var(--bad);border-color:#9f1239}
+.lab-window{border:1px solid var(--lab-line);border-radius:14px;background:rgba(0,0,0,.5);overflow:hidden}
+.lab-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--lab-line);color:var(--lab-text);font:500 13px ui-monospace,Menlo,Consolas,monospace}
+.lab-bar i{width:11px;height:11px;border-radius:50%;background:#2a3a31}
+.lab-bar span{margin-left:auto}
+.lab-body{padding:20px}
+.lab-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.lab-status{margin-left:auto;display:inline-flex;align-items:center;gap:8px;color:var(--lab-text);font-size:13px}
+.lab-status::before{content:"";width:9px;height:9px;border-radius:50%;background:#475569}
+.lab-status[data-live=true]::before{background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.2)}
+.lab-meters{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.lab-meters p{padding:14px 16px;border:1px solid var(--lab-line);border-radius:10px;font-size:13px;color:var(--lab-text)}
+.lab-meters b{display:block;font-size:24px;color:#fff;letter-spacing:-.02em}
+.lab-mix{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--lab-line);margin-bottom:16px}
+.lab-mix span{transition:width .3s}
+.lab-scroll{max-height:320px;overflow:auto;border:1px solid var(--lab-line);border-radius:10px}
+.lab table{width:100%;border-collapse:collapse;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
+.lab th{position:sticky;top:0;background:#0a110d;text-align:left;padding:10px 14px;color:var(--lab-text);font-weight:600}
+.lab td{padding:8px 14px;border-top:1px solid #15201a}
+.lab tbody:empty::after{content:"No packets yet. Press Start to begin a simulated capture.";display:block;padding:24px 14px;color:var(--lab-text);font-family:Inter,sans-serif}
+.p-TCP,.p-HTTPS,.open{color:var(--ok)}.p-UDP,.p-DNS,.filtered{color:var(--info)}.p-ICMP,.p-ARP{color:var(--warn)}.closed{color:var(--bad)}
+.lab input,.lab textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--lab-line);background:#0a110d;color:#fff;font:14px ui-monospace,Menlo,Consolas,monospace}
+.lab input:focus,.lab textarea:focus{outline:2px solid var(--ok);outline-offset:1px}
+.lab-row{display:flex;gap:10px;margin-bottom:16px}
+.lab-row input{flex:1}
+.lab-note{color:var(--lab-text);font-size:13px;margin-top:14px}
+.hash-list{display:grid;gap:10px;margin-top:16px}
+.hash-list p{padding:12px 14px;border:1px solid var(--lab-line);border-radius:10px;font-size:12px;color:var(--lab-text)}
+.hash-list code,.lab output{display:block;margin-top:4px;color:#fff;font:13px ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.lab output{padding:14px;border:1px solid var(--lab-line);border-radius:10px;min-height:48px;margin-top:16px}
+.lab-body[hidden]{display:none}
+@media(max-width:960px){.hero{grid-template-columns:1fr}.portrait{max-width:520px}.projects,.skills{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.stats li:nth-child(3){border-left:0}.stats li:nth-child(n+3){border-top:1px solid var(--line)}}
+@media(max-width:620px){nav ul{display:none}.projects,.skills{grid-template-columns:1fr}.hero p{font-size:17px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div id="prog"></div>
-<canvas id="mx"></canvas>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></symbol>
+<symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2L8 14.2 3 9.3l6.9-1z"/></symbol>
+<symbol id="i-fork" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M6 7v2a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7M12 12v5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+<symbol id="i-win" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 14l2 2-2 2M12 18h4" transform="translate(0 -3)"/></symbol>
+<symbol id="i-net" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v5m0 0-6 5m6-5 6 5"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2zM4 19V5"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></symbol>
+<symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+<symbol id="i-in" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5m0 2a2.5 2.5 0 0 1 5 0v3"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0h11l-2 4 2 4H5"/></symbol>
+<symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12 4 7.5"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-hook" viewBox="0 0 24 24"><path d="M12 3v9a4 4 0 1 0 4 4M8 3h8"/></symbol>
+</svg>
 
-<!-- NAV -->
-<nav>
-  <a href="#hero" class="logo">PK<span>.</span>SEC</a>
-  <ul class="nav-links">
-    <li><a href="#profile">Profile</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#certs">Certs</a></li>
-    <li><a href="#stats">Stats</a></li>
-    <li><a href="#globe">Globe</a></li>
-    <li><a href="#demo">Lab</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#contact">Contact</a></li>
+<header>
+  <nav class="wrap" aria-label="Primary">
+    <a class="brand" href="#top">S4NTRX</a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Expertise</a></li>
+      <li><a href="#map">Map</a></li>
+      <li><a href="#lab">Lab</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-primary" href="https://github.com/s4ntrx"><svg class="icon"><use href="#i-github"/></svg>GitHub</a>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <h1>S4NTRX</h1>
+      <p>Cybersecurity researcher and builder. I write threat-detection scripts, incident-response references and training platforms, from dark-web reconnaissance to Windows forensics.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#work">View projects<svg class="icon"><use href="#i-out"/></svg></a>
+        <a class="btn" href="https://github.com/s4ntrx?tab=repositories"><svg class="icon"><use href="#i-github"/></svg>All repositories</a>
+      </div>
+    </div>
+    <figure class="portrait">
+      <img src="portrait.jpg" alt="Portrait of S4NTRX" width="960" height="1200" fetchpriority="high">
+      <figcaption><div><strong>S4NTRX</strong><span>Cybersecurity researcher</span></div><svg class="icon"><use href="#i-lock"/></svg></figcaption>
+    </figure>
+  </div>
+
+  <ul class="wrap stats" style="padding:0">
+    <li><b>235</b><span>GitHub followers</span></li>
+    <li><b>172</b><span>Stars earned</span></li>
+    <li><b>11</b><span>Public repositories</span></li>
+    <li><b>5+</b><span>Security domains</span></li>
   </ul>
-  <div class="nav-r">
-    <div class="online"><div class="dot"></div>ONLINE</div>
-  </div>
-</nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-wrap">
-    <div class="term-box">
-      <div class="term-bar">
-        <div class="td td1"></div><div class="td td2"></div><div class="td td3"></div>
-        <span class="term-title">peter@kariuki:~$ — bash v5.2</span>
+  <section id="work" class="wrap">
+    <div class="heading">
+      <h2>Selected work</h2>
+      <p>Open-source projects covering threat education, reconnaissance, incident response and awareness training.</p>
+    </div>
+    <div class="projects">
+      <a class="project" href="https://github.com/s4ntrx/Cybersecurity-Threats-Guide">
+        <header><svg class="icon"><use href="#i-book"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
+        <h3>Cybersecurity Threats Guide</h3>
+        <p>Documents major threats and vulnerabilities, with detection scripts and prevention strategies for each attack class.</p>
+        <footer><span><svg class="icon"><use href="#i-star"/></svg>31</span><span><svg class="icon"><use href="#i-fork"/></svg>2</span><span class="tag">Python</span></footer>
+      </a>
+      <a class="project" href="https://github.com/s4ntrx/S4ntrx-Bot">
+        <header><svg class="icon"><use href="#i-code"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
+        <h3>S4ntrx-Bot</h3>
+        <p>Multi-user Flask chatbot that teaches security fundamentals, built for classroom deployment.</p>
+        <footer><span><svg class="icon"><use href="#i-star"/></svg>29</span><span><svg class="icon"><use href="#i-fork"/></svg>1</span><span class="tag">Python</span></footer>
+      </a>
+      <a class="project" href="https://github.com/s4ntrx/My-Windows-Cheat-sheet">
+        <header><svg class="icon"><use href="#i-win"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
+        <h3>Windows Cheat Sheet</h3>
+        <p>Essential Windows commands in 8 categories, covering administration, security auditing and incident response.</p>
+        <footer><span><svg class="icon"><use href="#i-star"/></svg>24</span><span><svg class="icon"><use href="#i-fork"/></svg>2</span><span class="tag">PowerShell</span></footer>
+      </a>
+      <a class="project" href="https://github.com/s4ntrx/MUST-Campus">
+        <header><svg class="icon"><use href="#i-server"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
+        <h3>MUST Campus</h3>
+        <p>Campus web platform deployed to production, focused on clean UI and reliable delivery.</p>
+        <footer><span><svg class="icon"><use href="#i-star"/></svg>23</span><span><svg class="icon"><use href="#i-fork"/></svg>0</span><span class="tag">HTML</span></footer>
+      </a>
+      <a class="project" href="https://github.com/s4ntrx/Dark-Web">
+        <header><svg class="icon"><use href="#i-eye"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
+        <h3>Dark Web</h3>
+        <p>Toolkit and notes for safely researching hidden services and threat-actor infrastructure.</p>
+        <footer><span><svg class="icon"><use href="#i-star"/></svg>16</span><span><svg class="icon"><use href="#i-fork"/></svg>0</span><span class="tag">Shell</span></footer>
+      </a>
+      <a class="project" href="https://github.com/s4ntrx/RenPhisher">
+        <header><svg class="icon"><use href="#i-hook"/></svg><svg class="icon"><use href="#i-out"/></svg></header>
+        <h3>RenPhisher</h3>
+        <p>Awareness tool that shows how cloned sites harvest credentials, so users learn to spot social engineering.</p>
+        <footer><span><svg class="icon"><use href="#i-star"/></svg>6</span><span><svg class="icon"><use href="#i-fork"/></svg>0</span><span class="tag">HTML</span></footer>
+      </a>
+    </div>
+  </section>
+
+  <section id="skills" class="wrap">
+    <div class="heading">
+      <h2>Expertise</h2>
+      <p>What the repositories above demonstrate.</p>
+    </div>
+    <div class="skills">
+      <article><svg class="icon"><use href="#i-code"/></svg><h3>Security scripting</h3><p>Python detection and prevention scripts, plus automation tooling.</p></article>
+      <article><svg class="icon"><use href="#i-win"/></svg><h3>Windows incident response</h3><p>Security auditing and response workflows in PowerShell and CMD.</p></article>
+      <article><svg class="icon"><use href="#i-net"/></svg><h3>Network analysis</h3><p>Traffic interception with mitmproxy, reconnaissance and network utilities.</p></article>
+      <article><svg class="icon"><use href="#i-eye"/></svg><h3>Threat intelligence</h3><p>Dark-web research, vulnerability analysis and adversary tradecraft.</p></article>
+      <article><svg class="icon"><use href="#i-hook"/></svg><h3>Social engineering simulation</h3><p>Phishing-awareness tooling built for defensive training.</p></article>
+      <article><svg class="icon"><use href="#i-server"/></svg><h3>Flask applications</h3><p>Multi-user education platforms and chatbot backends.</p></article>
+      <article><svg class="icon"><use href="#i-lock"/></svg><h3>Privacy and OPSEC</h3><p>Hardening tooling and curated privacy-focused software stacks.</p></article>
+      <article><svg class="icon"><use href="#i-book"/></svg><h3>Security education</h3><p>Classroom-ready curricula, threat guides and training chatbots.</p></article>
+    </div>
+  </section>
+
+  <section id="map" class="wrap">
+    <div class="heading">
+      <h2>Global cyber attack map</h2>
+      <p>Simulated attack traffic with Nairobi as the origin. The data is generated in your browser and is not real threat intelligence.</p>
+    </div>
+    <figure class="map-panel">
+      <canvas id="attack-map" role="img" aria-label="Animated globe showing simulated attacks travelling to and from Nairobi"></canvas>
+      <figcaption class="map-legend">
+        <span class="origin">Nairobi (origin)</span>
+        <span class="incoming">Incoming attacks <b id="map-incoming">0</b></span>
+        <span class="outgoing">Outgoing probes <b id="map-outgoing">0</b></span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section id="lab" class="wrap">
+    <div class="heading">
+      <h2>Live security tools</h2>
+      <p>Four working tools that run in your browser. The sniffer and scanner are simulations: no real traffic is captured and no network is probed.</p>
+    </div>
+    <div class="lab">
+      <div class="lab-tabs" role="tablist" aria-label="Security tools">
+        <button role="tab" id="tab-sniffer" aria-controls="panel-sniffer" aria-selected="true"><svg class="icon"><use href="#i-net"/></svg>Packet sniffer</button>
+        <button role="tab" id="tab-scanner" aria-controls="panel-scanner" aria-selected="false"><svg class="icon"><use href="#i-eye"/></svg>Port scanner</button>
+        <button role="tab" id="tab-hash" aria-controls="panel-hash" aria-selected="false"><svg class="icon"><use href="#i-lock"/></svg>Hash generator</button>
+        <button role="tab" id="tab-base64" aria-controls="panel-base64" aria-selected="false"><svg class="icon"><use href="#i-code"/></svg>Base64</button>
       </div>
-      <div id="term-out"></div>
-      <div class="term-in-row">
-        <span class="pr">peter@kariuki:~$</span>
-        <input id="term-in" autocomplete="off" spellcheck="false" placeholder="type 'help'…"/>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="badge-row"><span class="bl"></span>CYBERSECURITY PORTFOLIO<span class="bl"></span></div>
-      <h1>Peter<br/><span>Kariuki</span></h1>
-      <p class="sub">Cybersecurity Enthusiast · Privacy Advocate · Network Security Researcher</p>
-      <div class="univ"><i class="fa-solid fa-graduation-cap"></i>BSc Computer Science — Meru University of Science and Technology</div>
-      <div class="tags">
-        <span class="tag">Penetration Testing</span><span class="tag">Network Analysis</span>
-        <span class="tag">Threat Intelligence</span><span class="tag">Privacy Tools</span>
-        <span class="tag">CTF</span><span class="tag">Python</span><span class="tag">Linux</span>
-      </div>
-      <div class="btns">
-        <a href="#projects" class="btn-g">VIEW PROJECTS</a>
-        <a href="https://github.com/Bd-Mutant7" target="_blank" class="btn-o"><i class="fa-brands fa-github"></i> GITHUB</a>
-        <button class="btn-o" onclick="showResume()"><i class="fa-solid fa-file-pdf"></i> RESUME</button>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- PROFILE -->
-<section id="profile">
-  <div class="p-card rv">
-    <div class="av-wrap">
-      <div class="av-ring"></div>
-      <img class="av" src="https://avatars.githubusercontent.com/Bd-Mutant7" alt="Peter Kariuki"
-        onerror="this.src='';this.style.background='#0f2040';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center'"/>
-      <div class="av-online"></div>
-    </div>
-    <div class="p-info">
-      <h2>Peter Kariuki</h2>
-      <div class="p-handle"><i class="fa-brands fa-github"></i> @Bd-Mutant7</div>
-      <div class="p-univ"><i class="fa-solid fa-school"></i> Meru University of Science and Technology · BSc Computer Science</div>
-      <p class="p-bio">Passionate CS student specialising in cybersecurity, network security and privacy engineering. Building open-source security tools and privacy resources. Seeking cybersecurity internships and research collaborations.</p>
-      <div class="p-stats">
-        <div class="ps"><span class="n" id="s-repos">8</span><span class="l">Repos</span></div>
-        <div class="ps"><span class="n" id="s-stars">19</span><span class="l">Stars</span></div>
-        <div class="ps"><span class="n" id="s-foll">—</span><span class="l">Followers</span></div>
-        <div class="ps"><span class="n">KE</span><span class="l">Location</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="lab-window">
+        <div class="lab-bar"><i></i><i></i><i></i><span id="lab-title">packet_sniffer.py</span></div>
 
-<div class="divider"><div class="dl"></div><span class="di">// PROJECTS //</span><div class="dl"></div></div>
+        <div class="lab-body lab-panel" id="panel-sniffer" role="tabpanel" aria-labelledby="tab-sniffer">
+          <div class="lab-controls">
+            <button class="lab-btn go" id="sniffer-start"><svg class="icon"><use href="#i-play"/></svg>Start</button>
+            <button class="lab-btn stop" id="sniffer-stop" disabled><svg class="icon"><use href="#i-stop"/></svg>Stop</button>
+            <button class="lab-btn" id="sniffer-clear"><svg class="icon"><use href="#i-trash"/></svg>Clear</button>
+            <span class="lab-status" id="sniffer-status" data-live="false">Idle</span>
+          </div>
+          <div class="lab-meters">
+            <p>Packets<b id="sniffer-count">0</b></p>
+            <p>Data captured<b id="sniffer-bytes">0 B</b></p>
+            <p>Top protocol<b id="sniffer-top">None</b></p>
+          </div>
+          <div class="lab-mix" id="sniffer-mix" aria-hidden="true"></div>
+          <div class="lab-scroll">
+            <table>
+              <thead><tr><th>Time</th><th>Source IP</th><th>Destination</th><th>Protocol</th><th>Len</th><th>Info</th></tr></thead>
+              <tbody id="sniffer-rows"></tbody>
+            </table>
+          </div>
+        </div>
 
-<section id="projects">
-  <div class="sh rv">
-    <div class="st">GitHub Repositories</div>
-    <h2 class="stitle">Project Repository</h2>
-    <p class="ssub">Auto-synced from GitHub · Security research, privacy tools &amp; applications</p>
-  </div>
-  <div class="proj-controls rv">
-    <div class="fg">
-      <span class="sl">FILTER:</span>
-      <button class="fb on" onclick="filt('all',this)">ALL</button>
-      <button class="fb" onclick="filt('security',this)"><i class="fa-solid fa-shield-halved"></i> SECURITY</button>
-      <button class="fb" onclick="filt('privacy',this)"><i class="fa-solid fa-lock"></i> PRIVACY</button>
-      <button class="fb" onclick="filt('network',this)"><i class="fa-solid fa-network-wired"></i> NETWORK</button>
-      <button class="fb" onclick="filt('app',this)"><i class="fa-solid fa-globe"></i> APPS</button>
-      <button class="fb" onclick="filt('tool',this)"><i class="fa-solid fa-wrench"></i> TOOLS</button>
-    </div>
-    <div class="sg">
-      <span class="sl">SORT:</span>
-      <button class="sb on" onclick="srt('stars',this)"><i class="fa-solid fa-star"></i> STARS</button>
-      <button class="sb" onclick="srt('updated',this)"><i class="fa-solid fa-clock"></i> RECENT</button>
-      <button class="sb" onclick="srt('alpha',this)"><i class="fa-solid fa-arrow-down-a-z"></i> A–Z</button>
-    </div>
-    <div class="api-s"><div class="api-dot" id="api-dot"></div><span id="api-txt">Loading...</span></div>
-  </div>
-  <div style="max-width:1180px;margin:0 auto 1.2rem">
-    <div style="font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--green);letter-spacing:2px;margin-bottom:.9rem;"><i class="fa-solid fa-star"></i> FEATURED PROJECTS</div>
-    <div class="feat-grid" id="feat-grid"></div>
-  </div>
-  <div class="all-repos" id="all-repos"></div>
-</section>
+        <div class="lab-body lab-panel" id="panel-scanner" role="tabpanel" aria-labelledby="tab-scanner" hidden>
+          <form class="lab-row" id="scanner-form">
+            <input id="scanner-target" aria-label="Scan target" value="scanme.example.com" spellcheck="false" required>
+            <button class="lab-btn go" id="scanner-run" type="submit"><svg class="icon"><use href="#i-play"/></svg>Scan target</button>
+          </form>
+          <div class="lab-scroll">
+            <table>
+              <thead><tr><th>Port</th><th>Service</th><th>State</th></tr></thead>
+              <tbody id="scanner-rows"></tbody>
+            </table>
+          </div>
+          <p class="lab-note">Results are generated from the target name and are not real. Only scan systems you own or have written permission to test.</p>
+        </div>
 
-<div class="divider"><div class="dl"></div><span class="di">// SKILLS //</span><div class="dl"></div></div>
+        <div class="lab-body lab-panel" id="panel-hash" role="tabpanel" aria-labelledby="tab-hash" hidden>
+          <textarea id="hash-input" rows="3" aria-label="Text to hash" placeholder="Type or paste text to hash"></textarea>
+          <div class="hash-list" id="hash-list"></div>
+        </div>
 
-<section id="skills">
-  <div class="sh rv">
-    <div class="st">Technical Arsenal</div>
-    <h2 class="stitle">Skills &amp; Technologies</h2>
-    <p class="ssub">Core cybersecurity tools, programming languages and security domains</p>
-  </div>
-  <div class="sk-layout">
-    <div class="radar-box rv">
-      <div class="radar-lbl"><i class="fa-solid fa-chart-simple"></i> DOMAIN PROFICIENCY RADAR</div>
-      <canvas id="radar" width="300" height="300"></canvas>
-    </div>
-    <div class="sk-cats">
-      <div class="sk-cat rv">
-        <div class="sk-ch"><i class="fa-solid fa-shield-halved" style="color:var(--red)"></i> Security Tools</div>
-        <div class="sk-list" id="sk-tools"></div>
-      </div>
-      <div class="sk-cat rv">
-        <div class="sk-ch"><i class="fa-solid fa-code" style="color:var(--cyan)"></i> Programming Languages</div>
-        <div class="sk-list" id="sk-langs"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><div class="dl"></div><span class="di">// CERTIFICATIONS //</span><div class="dl"></div></div>
-
-<!-- CERTS -->
-<section id="certs">
-  <div class="sh rv">
-    <div class="st">Credentials</div>
-    <h2 class="stitle">Certifications</h2>
-    <p class="ssub">Professional cybersecurity certifications and training programs</p>
-  </div>
-  <div class="certs-grid">
-    <div class="cert-card rv">
-      <div class="c-hd"><div class="c-logo"><img src="https://cdn.simpleicons.org/google/4285F4" onerror="this.parentElement.innerHTML='<i class=\'fa-brands fa-google\' style=\'color:#4285F4;font-size:1.1rem\'></i>'"/></div><div><div class="c-org">Google / Coursera</div></div></div>
-      <div class="c-name">Google Cybersecurity Professional Certificate</div>
-      <div class="c-date"><i class="fa-regular fa-calendar"></i> 2024</div>
-      <div class="c-ft"><span class="cst ca"><i class="fa-solid fa-circle-check"></i> COMPLETED</span><a href="https://coursera.org" target="_blank" class="cv">VERIFY →</a></div>
-    </div>
-    <div class="cert-card rv">
-      <div class="c-hd"><div class="c-logo"><img src="https://cdn.simpleicons.org/cisco/1BA0D7" onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-network-wired\' style=\'color:#1BA0D7;font-size:1.1rem\'></i>'"/></div><div><div class="c-org">Cisco</div></div></div>
-      <div class="c-name">Cisco CyberOps Associate (CBROPS)</div>
-      <div class="c-date"><i class="fa-regular fa-calendar"></i> 2024</div>
-      <div class="c-ft"><span class="cst ca"><i class="fa-solid fa-circle-check"></i> COMPLETED</span><a href="https://cisco.com" target="_blank" class="cv">VERIFY →</a></div>
-    </div>
-    <div class="cert-card rv">
-      <div class="c-hd"><div class="c-logo" style="background:rgba(200,32,47,.08);border-color:rgba(200,32,47,.22)"><i class="fa-solid fa-shield-halved" style="color:#c8202f;font-size:1.2rem"></i></div><div><div class="c-org">CompTIA</div></div></div>
-      <div class="c-name">CompTIA Security+ (SY0-701)</div>
-      <div class="c-date"><i class="fa-regular fa-calendar"></i> In Progress</div>
-      <div class="c-ft"><span class="cst ci"><i class="fa-solid fa-spinner fa-spin"></i> IN PROGRESS</span><a href="https://comptia.org" target="_blank" class="cv">INFO →</a></div>
-    </div>
-    <div class="cert-card rv">
-      <div class="c-hd"><div class="c-logo" style="background:#111;border-color:#333"><i class="fa-solid fa-terminal" style="color:#c11;font-size:1.1rem"></i></div><div><div class="c-org">TryHackMe</div></div></div>
-      <div class="c-name">Pre-Security &amp; SOC Level 1 Path</div>
-      <div class="c-date"><i class="fa-regular fa-calendar"></i> 2023</div>
-      <div class="c-ft"><span class="cst ca"><i class="fa-solid fa-circle-check"></i> COMPLETED</span><a href="https://tryhackme.com" target="_blank" class="cv">VERIFY →</a></div>
-    </div>
-    <div class="cert-card rv">
-      <div class="c-hd"><div class="c-logo" style="background:rgba(0,100,200,.09);border-color:rgba(0,100,200,.22)"><i class="fa-solid fa-award" style="color:#0064c8;font-size:1.2rem"></i></div><div><div class="c-org">ISC²</div></div></div>
-      <div class="c-name">ISC² Certified in Cybersecurity (CC)</div>
-      <div class="c-date"><i class="fa-regular fa-calendar"></i> 2024</div>
-      <div class="c-ft"><span class="cst ca"><i class="fa-solid fa-circle-check"></i> COMPLETED</span><a href="https://isc2.org" target="_blank" class="cv">VERIFY →</a></div>
-    </div>
-    <div class="cert-card rv">
-      <div class="c-hd"><div class="c-logo" style="background:rgba(255,140,0,.09);border-color:rgba(255,140,0,.22)"><i class="fa-solid fa-user-secret" style="color:#ff8c00;font-size:1.2rem"></i></div><div><div class="c-org">EC-Council</div></div></div>
-      <div class="c-name">Ethical Hacking Essentials (EHE)</div>
-      <div class="c-date"><i class="fa-regular fa-calendar"></i> 2023</div>
-      <div class="c-ft"><span class="cst ca"><i class="fa-solid fa-circle-check"></i> COMPLETED</span><a href="https://eccouncil.org" target="_blank" class="cv">VERIFY →</a></div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><div class="dl"></div><span class="di">// STATS //</span><div class="dl"></div></div>
-
-<!-- STATS -->
-<section id="stats">
-  <div class="sh rv">
-    <div class="st">Analytics</div>
-    <h2 class="stitle">GitHub Statistics</h2>
-    <p class="ssub">Repository activity and contribution metrics</p>
-  </div>
-  <div class="stat-grid rv">
-    <div class="sbox"><span class="snum" id="sc-repos">8</span><span class="slbl">Repositories</span></div>
-    <div class="sbox"><span class="snum" id="sc-stars">19</span><span class="slbl">Total Stars</span></div>
-    <div class="sbox"><span class="snum" id="sc-langs">5+</span><span class="slbl">Languages</span></div>
-    <div class="sbox"><span class="snum" id="sc-forks">4</span><span class="slbl">Total Forks</span></div>
-  </div>
-  <div class="contrib-box rv">
-    <div class="contrib-lbl"><i class="fa-solid fa-chart-bar"></i> GITHUB CONTRIBUTION ACTIVITY</div>
-    <img id="contrib-img" src="https://ghchart.rshah.org/00ff88/Bd-Mutant7"
-      alt="GitHub Contributions" style="width:100%;border-radius:4px;display:block"
-      onerror="this.style.display='none';document.getElementById('contrib-fb').style.display='block'"/>
-    <div id="contrib-fb" style="display:none;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--t3);text-align:center;padding:1.5rem">
-      <i class="fa-brands fa-github" style="font-size:2rem;color:var(--cyan);display:block;margin-bottom:.5rem"></i>
-      Visit <a href="https://github.com/Bd-Mutant7" target="_blank" style="color:var(--cyan)">github.com/Bd-Mutant7</a> to view contribution graph
-    </div>
-  </div>
-</section>
-
-<!-- NETWORK MAP -->
-<section id="network">
-  <div class="sh rv">
-    <div class="st">Visualization</div>
-    <h2 class="stitle">Interactive Network Map</h2>
-    <p class="ssub">Live node &amp; packet flow simulation — demonstrating networking concepts</p>
-  </div>
-  <div class="cvs-box rv" style="background:#020810">
-    <canvas id="net-cvs"></canvas>
-  </div>
-</section>
-
-<!-- GLOBE -->
-<section id="globe">
-  <div class="sh rv">
-    <div class="st">Threat Intelligence</div>
-    <h2 class="stitle">Global Cyber Attack Map</h2>
-    <p class="ssub">Simulated real-time attack vectors — Nairobi origin highlighted</p>
-  </div>
-  <div class="cvs-box rv" style="background:#010608">
-    <canvas id="globe-cvs"></canvas>
-  </div>
-</section>
-
-<div class="divider"><div class="dl"></div><span class="di">// SECURITY LAB //</span><div class="dl"></div></div>
-
-<!-- ══════════════════════════════════════════════════════════════════════
-     SECURITY LAB — 4 tabs added; only the section heading + content
-     changed; all surrounding HTML/CSS/JS left untouched
-     ══════════════════════════════════════════════════════════════════════ -->
-<section id="demo">
-  <div class="sh rv">
-    <div class="st">Security Lab</div>
-    <h2 class="stitle">Live Security Tools</h2>
-    <p class="ssub">Real-time simulated network traffic capture &amp; analysis</p>
-  </div>
-
-  <!-- TAB ROW -->
-  <div class="lab-tab-row rv">
-    <button class="lt lt-on" onclick="switchLab('sniffer',this)">
-      <i class="fa-solid fa-wifi"></i> PACKET SNIFFER
-    </button>
-    <button class="lt" onclick="switchLab('ports',this)">
-      <i class="fa-solid fa-magnifying-glass"></i> PORT SCANNER
-    </button>
-    <button class="lt" onclick="switchLab('hash',this)">
-      <i class="fa-solid fa-hashtag"></i> HASH GENERATOR
-    </button>
-    <button class="lt" onclick="switchLab('b64',this)">
-      <i class="fa-solid fa-code"></i> BASE64 ENCODE
-    </button>
-  </div>
-
-  <!-- ── PANEL 1: PACKET SNIFFER (original, unchanged) ── -->
-  <div class="lab-panel lp-on" id="lab-sniffer">
-    <div class="demo-box rv">
-      <div class="demo-bar">
-        <div class="td td1"></div><div class="td td2"></div><div class="td td3"></div>
-        <span class="demo-ttl"><i class="fa-solid fa-wifi"></i> packet_sniffer.py — CAPTURE MODE</span>
-      </div>
-      <div class="demo-ctrls">
-        <button class="cb cs" onclick="startCap()"><i class="fa-solid fa-play"></i> START</button>
-        <button class="cb cx" onclick="stopCap()"><i class="fa-solid fa-stop"></i> STOP</button>
-        <button class="cb cc" onclick="clearCap()"><i class="fa-solid fa-trash"></i> CLEAR</button>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--t3);margin-left:auto" id="cap-st"><i class="fa-solid fa-circle"></i> IDLE</span>
-      </div>
-      <div class="pkt-wrap">
-        <table><thead><tr><th>Time</th><th>Source IP</th><th>Destination</th><th>Protocol</th><th>Len</th><th>Info</th></tr></thead>
-        <tbody id="pkt-body"></tbody></table>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PANEL 2: PORT SCANNER ── -->
-  <div class="lab-panel" id="lab-ports">
-    <div class="demo-box rv">
-      <div class="demo-bar">
-        <div class="td td1"></div><div class="td td2"></div><div class="td td3"></div>
-        <span class="demo-ttl"><i class="fa-solid fa-magnifying-glass"></i> port_scanner.py — SIMULATION</span>
-      </div>
-      <div class="demo-ctrls">
-        <input class="lab-input" id="scan-ip" placeholder="Target IP: 192.168.1.1" style="max-width:240px;width:auto"/>
-        <button class="cb cs" onclick="runPortScan()" style="margin-left:.3rem"><i class="fa-solid fa-play"></i> SCAN TARGET</button>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--t3);margin-left:auto" id="scan-log"></span>
-      </div>
-      <div style="padding:.9rem 1.3rem 1.1rem">
-        <div class="port-grid" id="port-grid"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PANEL 3: HASH GENERATOR ── -->
-  <div class="lab-panel" id="lab-hash">
-    <div class="demo-box rv">
-      <div class="demo-bar">
-        <div class="td td1"></div><div class="td td2"></div><div class="td td3"></div>
-        <span class="demo-ttl"><i class="fa-solid fa-hashtag"></i> hash_generator.py</span>
-      </div>
-      <div style="padding:1rem 1.3rem">
-        <input class="lab-input" id="hash-input" placeholder="Enter text to hash…" oninput="genHashes()" style="margin-bottom:1rem"/>
-        <div id="hash-output">
-          <span style="font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--t3)">Type above to generate hashes in real-time…</span>
+        <div class="lab-body lab-panel" id="panel-base64" role="tabpanel" aria-labelledby="tab-base64" hidden>
+          <textarea id="base64-input" rows="3" aria-label="Input text" placeholder="Enter text to encode or Base64 to decode"></textarea>
+          <div class="lab-controls" style="margin:16px 0 0">
+            <button class="lab-btn go" id="base64-encode">Encode</button>
+            <button class="lab-btn" id="base64-decode">Decode</button>
+          </div>
+          <output id="base64-output" aria-live="polite">Result appears here.</output>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ── PANEL 4: BASE64 ENCODE / DECODE ── -->
-  <div class="lab-panel" id="lab-b64">
-    <div class="demo-box rv">
-      <div class="demo-bar">
-        <div class="td td1"></div><div class="td td2"></div><div class="td td3"></div>
-        <span class="demo-ttl"><i class="fa-solid fa-code"></i> base64_tool.py</span>
-      </div>
-      <div style="padding:1rem 1.3rem">
-        <div class="b64-tog-row">
-          <button class="cb cs b64-tog" id="b64-enc-btn" onclick="setB64Mode('enc',this)">ENCODE</button>
-          <button class="cb cc b64-tog" id="b64-dec-btn" onclick="setB64Mode('dec',this)">DECODE</button>
-        </div>
-        <input class="lab-input" id="b64-input" placeholder="Enter text…" oninput="runB64()" style="margin-bottom:.9rem"/>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:.4rem">RESULT:</div>
-        <div id="b64-output" style="background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;padding:.65rem .9rem;font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--green);word-break:break-all;min-height:2.2rem;line-height:1.6">—</div>
+  <section id="contact" class="wrap">
+    <div class="contact">
+      <h2>Need a security tool built or a team trained?</h2>
+      <p>Threat research, defensive tooling and security education. Reach out through GitHub or X.</p>
+      <div class="actions">
+        <a class="btn" href="https://github.com/s4ntrx"><svg class="icon"><use href="#i-github"/></svg>@s4ntrx</a>
+        <a class="btn btn-outline" href="https://x.com/BdMutant"><svg class="icon"><use href="#i-x"/></svg>@BdMutant</a>
       </div>
     </div>
-  </div>
-</section>
-<!-- ══════════════════════════════════════════════════════════════════════ -->
+  </section>
+</main>
 
-<div class="divider"><div class="dl"></div><span class="di">// BLOG //</span><div class="dl"></div></div>
-
-<section id="blog">
-  <div class="sh rv">
-    <div class="st">Knowledge Base</div>
-    <h2 class="stitle">CTF &amp; Security Writeups</h2>
-    <p class="ssub">Technical deep-dives, vulnerability research and CTF walkthroughs</p>
-  </div>
-  <div class="blog-ctrls rv">
-    <input class="bs2" id="blog-s" placeholder="Search articles…" oninput="renderBlog()"/>
-    <div class="fg">
-      <button class="fb on" onclick="setBT('all',this)">ALL</button>
-      <button class="fb" onclick="setBT('Network',this)">NETWORK</button>
-      <button class="fb" onclick="setBT('CTF',this)">CTF</button>
-      <button class="fb" onclick="setBT('Privacy',this)">PRIVACY</button>
-      <button class="fb" onclick="setBT('Threat',this)">THREATS</button>
-      <button class="fb" onclick="setBT('OSINT',this)">OSINT</button>
-    </div>
-  </div>
-  <div class="blog-grid" id="blog-grid"></div>
-</section>
-
-<div class="divider"><div class="dl"></div><span class="di">// CONTACT //</span><div class="dl"></div></div>
-
-<section id="contact">
-  <div class="sh rv">
-    <div class="st">Connect</div>
-    <h2 class="stitle">Get In Touch</h2>
-    <p class="ssub">Open to cybersecurity roles, collaborations and research partnerships</p>
-  </div>
-  <div class="contact-grid">
-    <div class="clinks">
-      <a href="https://github.com/Bd-Mutant7" target="_blank" class="clink"><div class="cli"><i class="fa-brands fa-github"></i></div><div class="clt"><strong>GitHub</strong><small>github.com/Bd-Mutant7</small></div><span class="cla"><i class="fa-solid fa-arrow-right"></i></span></a>
-      <a href="mailto:spicezke@gmail.com" class="clink"><div class="cli"><i class="fa-solid fa-envelope"></i></div><div class="clt"><strong>Email</strong><small>Send Email</small></div><span class="cla"><i class="fa-solid fa-arrow-right"></i></span></a>
-      <a href="https://linkedin.com" target="_blank" class="clink"><div class="cli"><i class="fa-brands fa-linkedin-in"></i></div><div class="clt"><strong>LinkedIn</strong><small>Connect professionally</small></div><span class="cla"><i class="fa-solid fa-arrow-right"></i></span></a>
-      <a href="https://tryhackme.com/p/peterkariukiwanj" target="_blank" class="clink"><div class="cli"><i class="fa-solid fa-crosshairs"></i></div><div class="clt"><strong>TryHackMe</strong><small>Cybersecurity challenges</small></div><span class="cla"><i class="fa-solid fa-arrow-right"></i></span></a>
-    </div>
-    <form class="cform" onsubmit="handleForm(event)">
-      <div class="fg2"><label class="fl">// NAME</label><input class="fi" type="text" placeholder="Your name" required/></div>
-      <div class="fg2"><label class="fl">// EMAIL</label><input class="fi" type="email" placeholder="your@email.com" required/></div>
-      <div class="fg2"><label class="fl">// MESSAGE</label><textarea class="ft" rows="4" placeholder="Your message…" required></textarea></div>
-      <button type="submit" class="btn-g">SEND MESSAGE <i class="fa-solid fa-paper-plane"></i></button>
-    </form>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="fb2">PK<span style="color:var(--green)">.</span>SEC</div>
-  <div class="fc">© 2025 Peter Kariuki · Meru University of Science and Technology</div>
-  <div class="fl2">
-    <a href="https://github.com/Bd-Mutant7" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
-    <a href="#hero"><i class="fa-solid fa-arrow-up"></i> Top</a>
-  </div>
+<footer class="wrap site">
+  <ul class="badges" aria-label="Profiles">
+    <li><a href="https://www.linkedin.com" target="_blank" rel="noopener"><svg class="icon"><use href="#i-in"/></svg>LinkedIn</a></li>
+    <li><a href="https://tryhackme.com/p/peterkariukiwanj" target="_blank" rel="noopener"><svg class="icon"><use href="#i-flag"/></svg>TryHackMe</a></li>
+    <li><a href="https://app.hackthebox.com" target="_blank" rel="noopener"><svg class="icon"><use href="#i-cube"/></svg>Hack The Box</a></li>
+    <li><a href="https://www.vulnhub.com" target="_blank" rel="noopener"><svg class="icon"><use href="#i-server"/></svg>VulnHub</a></li>
+    <li><a href="https://ctfroom.com" target="_blank" rel="noopener"><svg class="icon"><use href="#i-target"/></svg>CTFroom</a></li>
+    <li><a href="https://cyberdefenders.org" target="_blank" rel="noopener"><svg class="icon"><use href="#i-shield"/></svg>CyberDefenders</a></li>
+  </ul>
+  <p>© 2026 S4NTRX. Built for defense.</p>
 </footer>
-
-<!-- FLOATING AI CHAT -->
-<div id="ai-bubble">
-  <div id="ai-panel">
-    <div class="ai-hd">
-      <div class="ai-av"><i class="fa-solid fa-robot"></i></div>
-      <div class="ai-inf"><strong>KARIUKI-AI</strong><small>● Portfolio Assistant</small></div>
-      <button class="ai-x" onclick="toggleAI()"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="ai-msgs" id="ai-msgs">
-      <div class="msg ma"><div class="mav"><i class="fa-solid fa-robot" style="font-size:.6rem;color:#020408"></i></div><div class="mb">Hi! I'm Peter's AI assistant. Ask me about his projects, skills, certifications, or his studies at MUST.</div></div>
-    </div>
-    <div class="ai-quick" id="ai-quick">
-      <button class="aq" onclick="askAI('Who is Peter Kariuki?')">Who is Peter?</button>
-      <button class="aq" onclick="askAI('What projects has Peter built?')">Projects</button>
-      <button class="aq" onclick="askAI('What cybersecurity tools does Peter use?')">Skills</button>
-      <button class="aq" onclick="askAI('How can I contact Peter?')">Contact</button>
-    </div>
-    <div class="ai-in-row">
-      <input class="ai-in" id="ai-in" placeholder="Ask anything…" onkeydown="if(event.key==='Enter')sendAI()"/>
-      <button class="ai-send" onclick="sendAI()"><i class="fa-solid fa-paper-plane"></i></button>
-    </div>
-  </div>
-  <button id="ai-btn" onclick="toggleAI()" title="AI Portfolio Assistant">
-    <div class="ai-notif"></div>
-    <i class="fa-solid fa-robot"></i>
-  </button>
-</div>
-
-<!-- RESUME MODAL -->
-<div id="rmod">
-  <div class="rbox">
-    <h3><i class="fa-solid fa-file-pdf" style="color:var(--red)"></i> Resume Preview</h3>
-    <pre class="rprev" id="rprev"></pre>
-    <div class="ra">
-      <button class="rdl" onclick="dlPDF()"><i class="fa-solid fa-download"></i> DOWNLOAD PDF</button>
-      <button class="rcl" onclick="closeResume()">CLOSE</button>
-    </div>
-  </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 <script>
-'use strict';
-// ─────────────────────────────────────────────────────
-// CONSTANTS
-// ─────────────────────────────────────────────────────
-const GH = 'Bd-Mutant7';
-const FEATURED = ['Network-Packet-Sniffer-Traffic-Analyse-GUI','Cybersecurity-Threats-Guide','awesome-privacy','anti-theft-charge','recipe-book-app','Modern-App-Color-Combos'];
-const LC = {Python:'#3572A5',JavaScript:'#f1e05a',HTML:'#e34c26',CSS:'#563d7c',Shell:'#89e051',Bash:'#89e051',Markdown:'#083fa1',TypeScript:'#3178c6','C++':'#f34b7d',C:'#555555',Go:'#00add8'};
-const FMETA = {
-  'Network-Packet-Sniffer-Traffic-Analyse-GUI':{d:'GUI-based network packet sniffer for real-time traffic capture, protocol analysis and visualisation using Python and Scapy.',cat:'network',b:'bn',icls:'fa-network-wired',ts:['Python','Scapy','Tkinter','Networking']},
-  'Cybersecurity-Threats-Guide':{d:'Comprehensive guide covering modern threats, attack vectors, vulnerability analysis and mitigation strategies for security professionals.',cat:'security',b:'bs',icls:'fa-shield-halved',ts:['Documentation','Threat Analysis','Security Research']},
-  'awesome-privacy':{d:'Curated list of privacy-respecting tools, services and resources. A comprehensive reference for digital privacy and anonymity.',cat:'privacy',b:'bp',icls:'fa-lock',ts:['Markdown','Privacy','OSINT','Resources']},
-  'anti-theft-charge':{d:'Security utility protecting devices from BadUSB and unauthorised USB data exfiltration. Detects and blocks USB-based attack vectors.',cat:'security',b:'bs',icls:'fa-bolt',ts:['Python','USB Security','Hardware Security']},
-  'recipe-book-app':{d:'Full-stack recipe management web application with CRUD operations, search and a responsive modern UI.',cat:'app',b:'ba',icls:'fa-globe',ts:['JavaScript','HTML','CSS','Web Dev']},
-  'Modern-App-Color-Combos':{d:'Curated modern colour palette combinations for UI/UX design. A go-to reference for developers building contemporary applications.',cat:'tool',b:'bt',icls:'fa-palette',ts:['CSS','Design','UI/UX']},
+const byId=id=>document.getElementById(id);
+const randomInt=max=>Math.floor(Math.random()*max);
+const pick=list=>list[randomInt(list.length)];
+
+const tabs=[...document.querySelectorAll('[role=tab]')];
+const tabFiles={sniffer:'packet_sniffer.py',scanner:'port_scanner.py',hash:'hash_generator.py',base64:'base64_tool.py'};
+tabs.forEach(tab=>tab.addEventListener('click',()=>{
+  tabs.forEach(other=>other.setAttribute('aria-selected',other===tab));
+  document.querySelectorAll('.lab-panel').forEach(panel=>panel.hidden=panel.id!==tab.getAttribute('aria-controls'));
+  byId('lab-title').textContent=tabFiles[tab.id.replace('tab-','')];
+}));
+
+const protocolTable={
+  TCP:['443 > 51822 [ACK]','80 > 49211 [PSH, ACK]','22 > 60314 [SYN]','8080 > 53110 [FIN, ACK]'],
+  HTTPS:['TLS 1.3 Application Data','TLS 1.3 Client Hello','TLS 1.3 Server Hello'],
+  UDP:['NTP client request','QUIC initial packet','mDNS announcement'],
+  DNS:['Standard query A github.com','Standard query AAAA example.org','Response A 140.82.112.4'],
+  ICMP:['Echo (ping) request','Echo (ping) reply','Destination unreachable'],
+  ARP:['Who has 192.168.1.1? Tell 192.168.1.24','192.168.1.1 is at 3c:52:82:aa:10:f4']
 };
-const FALLBACK = [
-  {name:'Network-Packet-Sniffer-Traffic-Analyse-GUI',description:FMETA['Network-Packet-Sniffer-Traffic-Analyse-GUI'].d,language:'Python',stargazers_count:4,forks_count:1,updated_at:'2024-11-10T00:00:00Z',html_url:`https://github.com/${GH}/Network-Packet-Sniffer-Traffic-Analyse-GUI`},
-  {name:'Cybersecurity-Threats-Guide',description:FMETA['Cybersecurity-Threats-Guide'].d,language:'Markdown',stargazers_count:3,forks_count:0,updated_at:'2024-10-05T00:00:00Z',html_url:`https://github.com/${GH}/Cybersecurity-Threats-Guide`},
-  {name:'awesome-privacy',description:FMETA['awesome-privacy'].d,language:'Markdown',stargazers_count:6,forks_count:2,updated_at:'2024-09-20T00:00:00Z',html_url:`https://github.com/${GH}/awesome-privacy`},
-  {name:'anti-theft-charge',description:FMETA['anti-theft-charge'].d,language:'Python',stargazers_count:2,forks_count:0,updated_at:'2024-08-14T00:00:00Z',html_url:`https://github.com/${GH}/anti-theft-charge`},
-  {name:'recipe-book-app',description:FMETA['recipe-book-app'].d,language:'JavaScript',stargazers_count:1,forks_count:0,updated_at:'2024-07-02T00:00:00Z',html_url:`https://github.com/${GH}/recipe-book-app`},
-  {name:'Modern-App-Color-Combos',description:FMETA['Modern-App-Color-Combos'].d,language:'CSS',stargazers_count:2,forks_count:1,updated_at:'2024-06-18T00:00:00Z',html_url:`https://github.com/${GH}/Modern-App-Color-Combos`},
-  {name:'portfolio_website',description:'Personal cybersecurity portfolio website.',language:'HTML',stargazers_count:1,forks_count:0,updated_at:'2024-05-10T00:00:00Z',html_url:`https://github.com/${GH}/portfolio_website`},
-  {name:'python-security-tools',description:'Collection of Python scripts for network scanning and security automation.',language:'Python',stargazers_count:0,forks_count:0,updated_at:'2024-04-01T00:00:00Z',html_url:`https://github.com/${GH}`},
-];
+const protocolColors={TCP:'#22c55e',HTTPS:'#4ade80',UDP:'#15803d',DNS:'#bbf7d0',ICMP:'#ef4444',ARP:'#fca5a5'};
+const capture={timer:null,count:0,bytes:0,perProtocol:{}};
+const localIp=()=>'192.168.1.'+(2+randomInt(60));
+const publicIp=()=>[pick([34,52,104,140,151,185]),randomInt(256),randomInt(256),1+randomInt(254)].join('.');
+const formatBytes=bytes=>bytes<1024?bytes+' B':bytes<1048576?(bytes/1024).toFixed(1)+' KB':(bytes/1048576).toFixed(2)+' MB';
 
-let repos = [...FALLBACK];
-let curFilt = 'all', curSort = 'stars';
-
-// ─────────────────────────────────────────────────────
-// MATRIX RAIN
-// ─────────────────────────────────────────────────────
-try {
-  const cv = document.getElementById('mx'), cx = cv.getContext('2d');
-  const resize = () => { cv.width = innerWidth; cv.height = innerHeight; };
-  resize(); addEventListener('resize', resize);
-  const ch = '01アイウエオカキクコサシスセタチツテトナニ', cols = Math.floor(innerWidth / 16);
-  const dr = Array(cols).fill(1);
-  setInterval(() => {
-    cx.fillStyle = 'rgba(2,4,8,.05)'; cx.fillRect(0, 0, cv.width, cv.height);
-    cx.fillStyle = '#00ff88'; cx.font = '13px Share Tech Mono,monospace';
-    dr.forEach((y, i) => {
-      cx.fillText(ch[Math.floor(Math.random() * ch.length)], i * 16, y * 16);
-      if (y * 16 > cv.height && Math.random() > .975) dr[i] = 0; dr[i]++;
-    });
-  }, 60);
-} catch(e) {}
-
-// ─────────────────────────────────────────────────────
-// PAGE PROGRESS
-// ─────────────────────────────────────────────────────
-addEventListener('scroll', () => {
-  const p = (scrollY / (document.body.scrollHeight - innerHeight)) * 100;
-  document.getElementById('prog').style.width = p + '%';
+function renderCaptureStats(){
+  byId('sniffer-count').textContent=capture.count;
+  byId('sniffer-bytes').textContent=formatBytes(capture.bytes);
+  const ranked=Object.entries(capture.perProtocol).sort((a,b)=>b[1]-a[1]);
+  byId('sniffer-top').textContent=ranked.length?ranked[0][0]:'None';
+  byId('sniffer-mix').innerHTML=ranked.map(([name,total])=>`<span style="width:${total/capture.count*100}%;background:${protocolColors[name]}"></span>`).join('');
+}
+function capturePacket(){
+  const protocol=pick(Object.keys(protocolTable));
+  const outbound=Math.random()<.55;
+  const length=protocol==='ARP'?42:60+randomInt(1400);
+  const row=document.createElement('tr');
+  const cells=[new Date().toLocaleTimeString([],{hour12:false}),outbound?localIp():publicIp(),outbound?publicIp():localIp(),protocol,length,pick(protocolTable[protocol])];
+  cells.forEach((value,index)=>{const cell=document.createElement('td');cell.textContent=value;if(index===3)cell.className='p-'+protocol;row.append(cell)});
+  const rows=byId('sniffer-rows');
+  rows.prepend(row);
+  if(rows.children.length>80)rows.lastChild.remove();
+  capture.count++;capture.bytes+=length;capture.perProtocol[protocol]=(capture.perProtocol[protocol]||0)+1;
+  renderCaptureStats();
+}
+function setCapturing(isLive){
+  byId('sniffer-start').disabled=isLive;byId('sniffer-stop').disabled=!isLive;
+  const status=byId('sniffer-status');status.dataset.live=isLive;status.textContent=isLive?'Capturing':'Idle';
+}
+byId('sniffer-start').addEventListener('click',()=>{setCapturing(true);capture.timer=setInterval(capturePacket,450)});
+byId('sniffer-stop').addEventListener('click',()=>{clearInterval(capture.timer);setCapturing(false)});
+byId('sniffer-clear').addEventListener('click',()=>{
+  Object.assign(capture,{count:0,bytes:0,perProtocol:{}});
+  byId('sniffer-rows').replaceChildren();renderCaptureStats();
 });
 
-// ─────────────────────────────────────────────────────
-// HELPERS
-// ─────────────────────────────────────────────────────
-function esc(s) { const d = document.createElement('div'); d.textContent = String(s||''); return d.innerHTML; }
-function ago(iso) {
-  const diff = Math.floor((Date.now() - new Date(iso)) / 1000);
-  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
-  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
-  if (diff < 2592000) return Math.floor(diff/86400) + 'd ago';
-  if (diff < 31536000) return Math.floor(diff/2592000) + 'mo ago';
-  return Math.floor(diff/31536000) + 'y ago';
-}
-function cat(r) {
-  const a = (r.name + ' ' + (r.description||'')).toLowerCase();
-  if (/privacy|anon|vpn|encrypt/.test(a)) return 'privacy';
-  if (/network|packet|sniffer|traffic|protocol/.test(a)) return 'network';
-  if (/security|cyber|threat|hack|pentest|vuln|exploit|ctf|theft|burp|nmap/.test(a)) return 'security';
-  if (/app|web|site|frontend|recipe/.test(a) || /javascript|html|css/.test((r.language||'').toLowerCase())) return 'app';
-  if (/tool|util|script|color|combo|palette/.test(a)) return 'tool';
-  return 'experiment';
-}
-function badge(c) {
-  const m = {security:['bs','fa-shield-halved','SECURITY'],privacy:['bp','fa-lock','PRIVACY'],network:['bn','fa-network-wired','NETWORK'],app:['ba','fa-globe','APP'],tool:['bt','fa-wrench','TOOL'],experiment:['be','fa-flask','EXPERIMENT']};
-  const [cls,ic,lbl] = m[c]||m.experiment;
-  return `<span class="bx ${cls}"><i class="fa-solid ${ic}"></i> ${lbl}</span>`;
-}
-function icon(r) {
-  const m = FMETA[r.name];
-  if (m) return `<i class="fa-solid ${m.icls}" style="color:var(--cyan)"></i>`;
-  const lang = (r.language||'').toLowerCase();
-  if (lang === 'python') return `<i class="fa-brands fa-python" style="color:#3572A5"></i>`;
-  if (lang === 'javascript') return `<i class="fa-brands fa-js" style="color:#f1e05a"></i>`;
-  if (lang === 'html') return `<i class="fa-brands fa-html5" style="color:#e34c26"></i>`;
-  if (lang === 'css') return `<i class="fa-brands fa-css3" style="color:#563d7c"></i>`;
-  if (lang === 'shell' || lang === 'bash') return `<i class="fa-solid fa-terminal" style="color:#89e051"></i>`;
-  return `<i class="fa-brands fa-github" style="color:var(--cyan)"></i>`;
-}
+const scanPorts=[[21,'FTP'],[22,'SSH'],[23,'Telnet'],[25,'SMTP'],[53,'DNS'],[80,'HTTP'],[110,'POP3'],[143,'IMAP'],[443,'HTTPS'],[445,'SMB'],[3306,'MySQL'],[3389,'RDP'],[8080,'HTTP-Alt']];
+const seedFrom=text=>[...text].reduce((seed,char)=>(seed*31+char.charCodeAt(0))>>>0,7);
+let scanTimer=null;
+byId('scanner-form').addEventListener('submit',event=>{
+  event.preventDefault();
+  clearInterval(scanTimer);
+  const target=byId('scanner-target').value.trim().toLowerCase();
+  const rows=byId('scanner-rows');rows.replaceChildren();
+  const runButton=byId('scanner-run');runButton.disabled=true;
+  let index=0;
+  scanTimer=setInterval(()=>{
+    const [port,service]=scanPorts[index];
+    const roll=(seedFrom(target+port)%10);
+    const state=[80,443].includes(port)&&roll>2?'open':roll<3?'open':roll<7?'closed':'filtered';
+    const row=document.createElement('tr');
+    [port,service,state].forEach((value,column)=>{const cell=document.createElement('td');cell.textContent=value;if(column===2)cell.className=state;row.append(cell)});
+    rows.append(row);
+    if(++index===scanPorts.length){clearInterval(scanTimer);runButton.disabled=false}
+  },140);
+});
 
-// ─────────────────────────────────────────────────────
-// RENDER PROJECTS
-// ─────────────────────────────────────────────────────
-function repoCard(r, featured) {
-  const c = cat(r), m = FMETA[r.name]||{};
-  const desc = r.description || m.d || 'No description provided.';
-  const techs = m.ts ? m.ts.map(t=>`<span style="font-family:'Share Tech Mono',monospace;font-size:.58rem;padding:2px 6px;background:rgba(0,212,255,.05);border:1px solid var(--bdr);border-radius:2px;color:var(--t3)">${esc(t)}</span>`).join('') : '';
-  return `<a href="${esc(r.html_url)}" target="_blank" class="pc card${featured?' feat':''}">
-    <div class="p-head"><div class="ico">${icon(r)}</div>${badge(c)}</div>
-    <div class="pn">${esc(r.name)}</div>
-    <p class="pd">${esc(desc)}</p>
-    ${techs?`<div style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.75rem">${techs}</div>`:''}
-    <div class="pf">
-      <div class="pm">
-        ${r.language?`<div class="pl"><div class="ld" style="background:${LC[r.language]||'#8b949e'}"></div>${esc(r.language)}</div>`:''}
-        ${r.stargazers_count?`<div class="ps2"><i class="fa-solid fa-star"></i>${r.stargazers_count}</div>`:''}
-      </div>
-      <div style="display:flex;align-items:center;gap:.6rem">
-        <span class="pu">${ago(r.updated_at)}</span>
-        <span class="pvl"><i class="fa-brands fa-github"></i> VIEW</span>
-      </div>
-    </div>
-  </a>`;
-}
-
-function renderProjects() {
-  const fg = document.getElementById('feat-grid');
-  fg.innerHTML = FEATURED.map(name => {
-    const r = repos.find(x=>x.name===name) || FALLBACK.find(x=>x.name===name) || {name,description:'',language:'Python',stargazers_count:0,forks_count:0,updated_at:new Date().toISOString(),html_url:`https://github.com/${GH}/${name}`};
-    return repoCard(r, true);
-  }).join('');
-
-  let list = [...repos];
-  if (curSort === 'stars') list.sort((a,b)=>b.stargazers_count-a.stargazers_count);
-  else if (curSort === 'updated') list.sort((a,b)=>new Date(b.updated_at)-new Date(a.updated_at));
-  else list.sort((a,b)=>a.name.localeCompare(b.name));
-  if (curFilt !== 'all') list = list.filter(r=>cat(r)===curFilt);
-
-  const groups = {};
-  list.forEach(r => { const c=cat(r); (groups[c]=groups[c]||[]).push(r); });
-  const GM = {security:{l:'Security & Exploitation',i:'fa-shield-halved',c:'var(--red)'},privacy:{l:'Privacy & Anonymity',i:'fa-lock',c:'var(--green)'},network:{l:'Network & Traffic Analysis',i:'fa-network-wired',c:'var(--cyan)'},app:{l:'Applications & Web',i:'fa-globe',c:'#6699ff'},tool:{l:'Tools & Utilities',i:'fa-wrench',c:'#ffe066'},experiment:{l:'Experiments & Research',i:'fa-flask',c:'#cc99ff'}};
-
-  const ar = document.getElementById('all-repos');
-  if (!list.length) { ar.innerHTML = '<p style="text-align:center;font-family:Share Tech Mono,monospace;color:var(--t3);padding:2rem;font-size:.8rem">No repositories match this filter.</p>'; return; }
-  ar.innerHTML = Object.entries(groups).map(([c,list2])=>{
-    const g = GM[c]||{l:c,i:'fa-code',c:'var(--t2)'};
-    return `<div class="cat-group rv">
-      <div class="cat-hd" style="color:${g.c}"><i class="fa-solid ${g.i}"></i>${g.l} <span style="font-size:.62rem;color:var(--t3);font-weight:400;font-family:'Share Tech Mono',monospace">(${list2.length})</span></div>
-      <div class="repo-grid">${list2.map(r=>repoCard(r,false)).join('')}</div>
-    </div>`;
-  }).join('');
-  doReveal();
-}
-
-function filt(f, btn) {
-  curFilt = f;
-  document.querySelectorAll('.proj-controls .fb').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on'); renderProjects();
-}
-function srt(s, btn) {
-  curSort = s;
-  document.querySelectorAll('.sg .sb').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on'); renderProjects();
-}
-
-// ─────────────────────────────────────────────────────
-// GITHUB API
-// ─────────────────────────────────────────────────────
-async function fetchGH() {
-  try {
-    const ctrl = new AbortController();
-    setTimeout(() => ctrl.abort(), 7000);
-    const [ur, rr] = await Promise.all([
-      fetch(`https://api.github.com/users/${GH}`, {signal:ctrl.signal}),
-      fetch(`https://api.github.com/users/${GH}/repos?per_page=100&sort=updated`, {signal:ctrl.signal})
-    ]);
-    if (!ur.ok) throw new Error('user ' + ur.status);
-    const u = await ur.json(); const rv = await rr.json();
-    if (!Array.isArray(rv)) throw new Error('bad repos');
-    repos = rv.filter(r=>r&&r.name&&!r.fork);
-    if (!repos.length) throw new Error('empty');
-
-    const stars = repos.reduce((s,r)=>s+r.stargazers_count,0);
-    const forks = repos.reduce((s,r)=>s+r.forks_count,0);
-    const langs = [...new Set(repos.map(r=>r.language).filter(Boolean))];
-    const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
-    set('sc-repos', repos.length);
-    set('sc-stars', stars);
-    set('sc-langs', langs.length+'+');
-    set('sc-forks', forks);
-    set('s-repos', u.public_repos);
-    set('s-stars', stars);
-    set('s-foll', u.followers);
-
-    document.getElementById('api-txt').textContent = `✓ Live · ${repos.length} repos`;
-    document.getElementById('api-dot').style.background = 'var(--green)';
-    renderProjects(); doReveal();
-  } catch(e) {
-    document.getElementById('api-txt').textContent = 'Cached · github.com/'+GH;
-    document.getElementById('api-dot').style.background = '#ffe066';
-  }
-}
-
-// ─────────────────────────────────────────────────────
-// SKILLS
-// ─────────────────────────────────────────────────────
-const TOOLS = [
-  {n:'Wireshark',p:88,src:'https://cdn.simpleicons.org/wireshark/1679A1',fb:'fa-wifi'},
-  {n:'Nmap',p:85,src:'',fb:'fa-magnifying-glass'},
-  {n:'Metasploit',p:72,src:'',fb:'fa-crosshairs'},
-  {n:'Burp Suite',p:70,src:'',fb:'fa-bug'},
-  {n:'Kali Linux',p:90,src:'https://cdn.simpleicons.org/kalilinux/557C94',fb:'fa-terminal'},
-  {n:'OWASP Tools',p:68,src:'',fb:'fa-globe'},
-];
-const LANGS = [
-  {n:'Python',p:85,src:'https://cdn.simpleicons.org/python/3776AB',fb:'fa-brands fa-python'},
-  {n:'JavaScript',p:75,src:'https://cdn.simpleicons.org/javascript/F7DF1E',fb:'fa-brands fa-js'},
-  {n:'Bash / Shell',p:82,src:'https://cdn.simpleicons.org/gnubash/4EAA25',fb:'fa-terminal'},
-  {n:'C / C++',p:60,src:'https://cdn.simpleicons.org/cplusplus/00599C',fb:'fa-code'},
-];
-
-function buildSkills() {
-  function row(s) {
-    return `<div class="sk-row">
-      <div class="sk-ic">${s.src?`<img src="${s.src}" onerror="this.parentElement.innerHTML='<i class=\'fa-solid ${s.fb}\'></i>'">`:`<i class="fa-solid ${s.fb}"></i>`}</div>
-      <div class="sk-txt"><span class="sk-n">${s.n}</span><div class="sk-bw"><div class="sk-b" data-p="${s.p}"></div></div></div>
-      <span class="sk-p">${s.p}%</span>
-    </div>`;
-  }
-  document.getElementById('sk-tools').innerHTML = TOOLS.map(row).join('');
-  document.getElementById('sk-langs').innerHTML = LANGS.map(row).join('');
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.querySelectorAll('.sk-b').forEach(b => { b.style.width = b.dataset.p + '%'; });
-    });
-  }, {threshold:.15});
-  document.querySelectorAll('.sk-cat').forEach(el => io.observe(el));
-}
-
-// ─────────────────────────────────────────────────────
-// RADAR CHART
-// ─────────────────────────────────────────────────────
-function buildRadar() {
-  try {
-    const cv = document.getElementById('radar');
-    const ctx = cv.getContext('2d');
-    const W = cv.width, H = cv.height, cx2 = W/2, cy2 = H/2, R = Math.min(W,H)/2 - 30;
-    const labels = ['Network\nSec','Pen\nTesting','Privacy\nEng','Threat\nAnalysis','Digital\nForensics','OSINT','Crypto','Secure\nDev'];
-    const vals = [88,72,92,75,65,80,68,70];
-    const N = labels.length;
-    const angle = (i) => (i / N) * Math.PI * 2 - Math.PI / 2;
-
-    ctx.clearRect(0,0,W,H);
-
-    for (let ring = 1; ring <= 4; ring++) {
-      ctx.beginPath();
-      for (let i = 0; i < N; i++) {
-        const a = angle(i), r2 = R * ring / 4;
-        i===0 ? ctx.moveTo(cx2+Math.cos(a)*r2, cy2+Math.sin(a)*r2)
-              : ctx.lineTo(cx2+Math.cos(a)*r2, cy2+Math.sin(a)*r2);
-      }
-      ctx.closePath();
-      ctx.strokeStyle = 'rgba(0,212,255,0.12)'; ctx.lineWidth = 1; ctx.stroke();
-    }
-
-    for (let i = 0; i < N; i++) {
-      const a = angle(i);
-      ctx.beginPath(); ctx.moveTo(cx2, cy2);
-      ctx.lineTo(cx2 + Math.cos(a)*R, cy2 + Math.sin(a)*R);
-      ctx.strokeStyle = 'rgba(0,212,255,0.1)'; ctx.lineWidth = 1; ctx.stroke();
-    }
-
-    ctx.beginPath();
-    vals.forEach((v,i) => {
-      const a = angle(i), r2 = R * v / 100;
-      i===0 ? ctx.moveTo(cx2+Math.cos(a)*r2, cy2+Math.sin(a)*r2)
-            : ctx.lineTo(cx2+Math.cos(a)*r2, cy2+Math.sin(a)*r2);
-    });
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(0,255,136,0.12)'; ctx.fill();
-    ctx.strokeStyle = '#00ff88'; ctx.lineWidth = 2; ctx.stroke();
-
-    vals.forEach((v,i) => {
-      const a = angle(i), r2 = R * v / 100;
-      ctx.beginPath(); ctx.arc(cx2+Math.cos(a)*r2, cy2+Math.sin(a)*r2, 4, 0, Math.PI*2);
-      ctx.fillStyle = '#00d4ff'; ctx.fill();
-    });
-
-    ctx.fillStyle = 'rgba(107,143,168,0.9)';
-    ctx.font = '9px Share Tech Mono, monospace';
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    labels.forEach((lbl,i) => {
-      const a = angle(i), pad = R + 22;
-      const x = cx2 + Math.cos(a)*pad, y = cy2 + Math.sin(a)*pad;
-      lbl.split('\n').forEach((line, li) => ctx.fillText(line, x, y + (li-0.5)*11));
-    });
-  } catch(e) {}
-}
-
-// ─────────────────────────────────────────────────────
-// NETWORK MAP
-// ─────────────────────────────────────────────────────
-(function() {
-  try {
-    const cv = document.getElementById('net-cvs');
-    const ctx = cv.getContext('2d');
-    function resize() { cv.width = cv.offsetWidth; cv.height = 360; }
-    resize();
-    new ResizeObserver(resize).observe(cv);
-
-    const ND = [{n:'Router',c:'#00ff88'},{n:'Firewall',c:'#ff2244'},{n:'Server',c:'#0057ff'},{n:'Client A',c:'#00d4ff'},{n:'Client B',c:'#00d4ff'},{n:'DNS',c:'#ffe066'},{n:'Switch',c:'#6699ff'},{n:'IDS',c:'#ff2244'},{n:'Proxy',c:'#00d4ff'},{n:'Database',c:'#6699ff'}];
-    const nodes = ND.map(nd => ({
-      ...nd, r: 7+Math.random()*5,
-      x: 60 + Math.random() * (cv.width - 120),
-      y: 50 + Math.random() * 250,
-      vx: (Math.random()-.5)*.5, vy: (Math.random()-.5)*.5
-    }));
-    const pkts = [];
-
-    setInterval(() => {
-      const a = Math.floor(Math.random()*nodes.length);
-      let b = Math.floor(Math.random()*nodes.length);
-      while (b===a) b = Math.floor(Math.random()*nodes.length);
-      pkts.push({a,b,t:0,c:['#00ff88','#00d4ff','#ff2244','#ffe066'][Math.floor(Math.random()*4)]});
-    }, 500);
-
-    function draw() {
-      ctx.clearRect(0,0,cv.width,cv.height);
-      for (let i=0;i<nodes.length;i++) for (let j=i+1;j<nodes.length;j++) {
-        const d = Math.hypot(nodes[i].x-nodes[j].x, nodes[i].y-nodes[j].y);
-        if (d < 220) {
-          ctx.strokeStyle = `rgba(0,212,255,${.06*(1-d/220)})`;
-          ctx.lineWidth = 1; ctx.beginPath();
-          ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke();
-        }
-      }
-      for (let i = pkts.length-1; i>=0; i--) {
-        const p = pkts[i]; p.t += .014;
-        const na = nodes[p.a], nb = nodes[p.b];
-        const x = na.x+(nb.x-na.x)*p.t, y = na.y+(nb.y-na.y)*p.t;
-        ctx.shadowBlur=8; ctx.shadowColor=p.c;
-        ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2); ctx.fill();
-        ctx.shadowBlur=0;
-        if (p.t>=1) pkts.splice(i,1);
-      }
-      nodes.forEach(n => {
-        n.x+=n.vx; n.y+=n.vy;
-        if(n.x<25||n.x>cv.width-25) n.vx*=-1;
-        if(n.y<25||n.y>cv.height-25) n.vy*=-1;
-        ctx.shadowBlur=12; ctx.shadowColor=n.c;
-        ctx.fillStyle=n.c; ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
-        ctx.shadowBlur=0;
-        ctx.fillStyle='rgba(224,240,255,.8)'; ctx.font='9px Share Tech Mono,monospace';
-        ctx.textAlign='center'; ctx.fillText(n.n,n.x,n.y+n.r+12);
-      });
-      requestAnimationFrame(draw);
-    }
-    draw();
-  } catch(e) {}
-})();
-
-// ─────────────────────────────────────────────────────
-// GLOBE
-// ─────────────────────────────────────────────────────
-(function() {
-  try {
-    const cv = document.getElementById('globe-cvs');
-    const ctx = cv.getContext('2d');
-
-    function resize() {
-      cv.width = cv.offsetWidth;
-      cv.height = Math.min(cv.offsetWidth * 0.6, 420);
-    }
-    resize();
-    new ResizeObserver(resize).observe(cv);
-
-    const ATTACKS = [
-      [-1,37,51,0,'Nairobi → London'],[-1,37,48,2,'Nairobi → Paris'],[-1,37,40,-74,'Nairobi → New York'],
-      [37,-122,51,0,'San Francisco → London'],[35,139,48,2,'Tokyo → Paris'],[40,-74,55,37,'New York → Moscow'],
-      [23,113,37,-122,'China → San Francisco'],[55,37,-33,151,'Moscow → Sydney'],[51,0,23,113,'London → China'],
-      [48,2,-1,37,'Paris → Nairobi'],
-    ];
-    const CITIES = [
-      {name:'Nairobi',lat:-1,lon:37,home:true},{name:'London',lat:51,lon:0},{name:'New York',lat:40,lon:-74},
-      {name:'Tokyo',lat:35,lon:139},{name:'Paris',lat:48,lon:2},{name:'Moscow',lat:55,lon:37},
-      {name:'Sydney',lat:-33,lon:151},{name:'S.Francisco',lat:37,lon:-122},{name:'Beijing',lat:39,lon:116},
-    ];
-
-    let rot = 0;
-    const arcs = ATTACKS.map(a => ({
-      lat1:a[0],lon1:a[1],lat2:a[2],lon2:a[3],label:a[4],
-      progress: Math.random(), speed: .003+Math.random()*.004,
-      color: a[0]===-1&&a[1]===37 ? '#00ff88' : '#ff2244'
-    }));
-
-    function project(lat, lon, cx, cy, R, rotOff) {
-      const phi  = (90 - lat) * Math.PI / 180;
-      const lam  = (lon + rotOff * 180/Math.PI) * Math.PI / 180;
-      const x3 = R * Math.sin(phi) * Math.cos(lam);
-      const y3 = R * Math.cos(phi);
-      const z3 = R * Math.sin(phi) * Math.sin(lam);
-      return { x: cx + x3, y: cy - y3, z: z3, vis: z3 > -R*0.15 };
-    }
-
-    function arcPoints(lat1,lon1,lat2,lon2,steps) {
-      const pts = [];
-      for (let i=0;i<=steps;i++) {
-        const t = i/steps;
-        pts.push({la:lat1+(lat2-lat1)*t, lo:lon1+(lon2-lon1)*t});
-      }
-      return pts;
-    }
-
-    let hovered = null;
-    cv.addEventListener('mousemove', e => {
-      const rect = cv.getBoundingClientRect();
-      const mx = e.clientX-rect.left, my = e.clientY-rect.top;
-      const cx=cv.width/2, cy=cv.height/2, R=Math.min(cv.width,cv.height)*0.42;
-      hovered = null;
-      CITIES.forEach(city=>{
-        const p = project(city.lat,city.lon,cx,cy,R,rot);
-        if(p.vis && Math.hypot(p.x-mx,p.y-my)<16) hovered=city;
-      });
-    });
-
-    function draw() {
-      const W=cv.width, H=cv.height, cx=W/2, cy=H/2;
-      const R = Math.min(W,H)*0.42;
-      ctx.clearRect(0,0,W,H);
-
-      const grd = ctx.createRadialGradient(cx,cy,R*.7,cx,cy,R*1.3);
-      grd.addColorStop(0,'rgba(0,212,255,0)'); grd.addColorStop(1,'rgba(0,212,255,0.06)');
-      ctx.fillStyle=grd; ctx.beginPath(); ctx.arc(cx,cy,R*1.3,0,Math.PI*2); ctx.fill();
-
-      const bg = ctx.createRadialGradient(cx-R*.3,cy-R*.3,R*.1,cx,cy,R);
-      bg.addColorStop(0,'#0a1e38'); bg.addColorStop(1,'#020810');
-      ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
-      ctx.strokeStyle='rgba(0,212,255,0.35)'; ctx.lineWidth=1.5; ctx.stroke();
-
-      for (let lat=-60;lat<=60;lat+=30) {
-        ctx.beginPath(); let first=true;
-        for (let lon=-180;lon<=180;lon+=5) {
-          const p = project(lat,lon,cx,cy,R,rot);
-          if (!p.vis) { first=true; continue; }
-          first ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y); first=false;
-        }
-        ctx.strokeStyle='rgba(0,212,255,0.07)'; ctx.lineWidth=.7; ctx.stroke();
-      }
-      for (let lon=0;lon<360;lon+=30) {
-        ctx.beginPath(); let first=true;
-        for (let lat=-90;lat<=90;lat+=5) {
-          const p = project(lat,lon,cx,cy,R,rot);
-          if (!p.vis) { first=true; continue; }
-          first ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y); first=false;
-        }
-        ctx.strokeStyle='rgba(0,212,255,0.07)'; ctx.lineWidth=.7; ctx.stroke();
-      }
-
-      arcs.forEach(arc => {
-        arc.progress += arc.speed;
-        if (arc.progress > 1.5) arc.progress = 0;
-        const pts = arcPoints(arc.lat1,arc.lon1,arc.lat2,arc.lon2,60);
-        const end = Math.min(Math.floor(arc.progress*60), 60);
-        const start = Math.max(0, end-20);
-        ctx.beginPath(); let first=true;
-        for (let i=start;i<=end;i++) {
-          const p = project(pts[i].la,pts[i].lo,cx,cy,R,rot);
-          if (!p.vis) { first=true; continue; }
-          first ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y); first=false;
-        }
-        ctx.strokeStyle = arc.color; ctx.lineWidth = arc.color==='#00ff88'?2:1.5;
-        ctx.shadowBlur=8; ctx.shadowColor=arc.color; ctx.stroke(); ctx.shadowBlur=0;
-        if (end > 0 && end <= 60) {
-          const hp = project(pts[end].la,pts[end].lo,cx,cy,R,rot);
-          if (hp.vis) {
-            ctx.fillStyle=arc.color; ctx.shadowBlur=12; ctx.shadowColor=arc.color;
-            ctx.beginPath(); ctx.arc(hp.x,hp.y,3,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
-          }
-        }
-      });
-
-      CITIES.forEach(city => {
-        const p = project(city.lat,city.lon,cx,cy,R,rot);
-        if (!p.vis) return;
-        const col = city.home ? '#00ff88' : 'rgba(0,212,255,0.9)';
-        const sz = city.home ? 6 : 4;
-        if (city.home) {
-          ctx.strokeStyle='rgba(0,255,136,0.3)'; ctx.lineWidth=1;
-          ctx.beginPath(); ctx.arc(p.x,p.y,sz+6+Math.sin(Date.now()/400)*4,0,Math.PI*2); ctx.stroke();
-        }
-        ctx.fillStyle=col; ctx.shadowBlur=10; ctx.shadowColor=col;
-        ctx.beginPath(); ctx.arc(p.x,p.y,sz,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
-        ctx.fillStyle=hovered===city?'#fff':'rgba(224,240,255,0.75)';
-        ctx.font=`${city.home?'bold ':''}10px Share Tech Mono,monospace`;
-        ctx.textAlign='center'; ctx.fillText(city.name,p.x,p.y-sz-5);
-      });
-
-      ctx.fillStyle='rgba(0,255,136,0.7)'; ctx.font='9px Share Tech Mono,monospace'; ctx.textAlign='left';
-      ctx.fillText('● Nairobi (Origin)',14,H-28);
-      ctx.fillStyle='rgba(255,34,68,0.7)'; ctx.fillText('─ Incoming Attacks',14,H-16);
-      rot += .004;
-      requestAnimationFrame(draw);
-    }
-    draw();
-  } catch(e) {}
-})();
-
-// ─────────────────────────────────────────────────────
-// TERMINAL
-// ─────────────────────────────────────────────────────
-const TH = []; let TI = -1;
-
-function tPrint(html) {
-  const el = document.getElementById('term-out');
-  el.innerHTML += `<div>${html}</div>`;
-  el.scrollTop = el.scrollHeight;
-}
-
-(function boot(){
-  const lines = [
-    `<span class="d">╔══════════════════════════════════════════╗</span>`,
-    `<span class="d">║  </span><span class="c">KARIUKI-OS v2.5</span><span class="d"> · </span><span class="g">Security Terminal</span><span class="d">    ║</span>`,
-    `<span class="d">║  Meru University of Science & Technology  ║</span>`,
-    `<span class="d">╚══════════════════════════════════════════╝</span>`,
-    `<span class="d">System ready. Type </span><span class="c">'help'</span><span class="d"> for commands.</span>`,
-    ``
-  ];
-  lines.forEach((l,i) => setTimeout(()=>tPrint(l), i*100));
-  setTimeout(()=>document.getElementById('term-in').focus(), lines.length*100+200);
-})();
-
-document.getElementById('term-in').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    const v = this.value.trim();
-    if (v) { TH.unshift(v); TI=-1; runCmd(v); }
-    this.value = '';
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    if (TI < TH.length-1) { TI++; this.value=TH[TI]; }
-  } else if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    if (TI > 0) { TI--; this.value=TH[TI]; } else { TI=-1; this.value=''; }
-  } else if (e.key === 'Tab') {
-    e.preventDefault();
-    const cmds = ['help','whoami','projects','skills','contact','github','resume','clear','ls'];
-    const m = cmds.find(c=>c.startsWith(this.value));
-    if (m) this.value = m;
+const hashAlgorithms=['SHA-1','SHA-256','SHA-384','SHA-512'];
+const hashList=byId('hash-list');
+hashList.innerHTML=hashAlgorithms.map(name=>`<p>${name}<code data-algo="${name}">Waiting for input</code></p>`).join('');
+byId('hash-input').addEventListener('input',async event=>{
+  const bytes=new TextEncoder().encode(event.target.value);
+  for(const name of hashAlgorithms){
+    const target=hashList.querySelector(`[data-algo="${name}"]`);
+    if(!bytes.length){target.textContent='Waiting for input';continue}
+    const digest=await crypto.subtle.digest(name,bytes);
+    target.textContent=[...new Uint8Array(digest)].map(byte=>byte.toString(16).padStart(2,'0')).join('');
   }
 });
-document.getElementById('hero').addEventListener('click', ()=>document.getElementById('term-in').focus());
 
-function runCmd(cmd) {
-  tPrint(`<span class="g">peter@kariuki:~$</span> <span class="c">${esc(cmd)}</span>`);
-  switch(cmd.toLowerCase().trim()) {
-    case 'help':
-      tPrint(`<span class="d">┌── Available Commands ─────────────────┐</span>`);
-      [['help','Show this help'],['whoami','Profile information'],['projects','List repositories'],['skills','Technical skills'],['contact','Contact details'],['github','Open GitHub profile'],['resume','Generate PDF resume'],['clear','Clear terminal'],['ls','List files'],['date','Current date/time']].forEach(([c,d])=>
-        tPrint(`<span class="d">│</span> <span class="c">${c.padEnd(10)}</span><span class="d">─</span> <span class="w">${d}</span>`));
-      tPrint(`<span class="d">└──────────────────────────────────────┘</span>`);
-      tPrint(`<span class="d">TIP: ↑↓ history · Tab autocomplete</span>`);
-      break;
-    case 'whoami':
-      [['name','Peter Kariuki'],['alias','Bd-Mutant7'],['university','Meru University of Science and Technology'],['degree','BSc Computer Science (ongoing)'],['focus','Network Security · Privacy · Ethical Hacking'],['github','github.com/Bd-Mutant7'],['location','Kenya 🇰🇪'],['status','Open to opportunities ●']].forEach(([k,v])=>
-        tPrint(`  <span class="g">${k.padEnd(12)}</span><span class="d">:</span> <span class="y">${v}</span>`));
-      break;
-    case 'projects':
-      tPrint(`<span class="d">Fetching repositories...</span>`);
-      setTimeout(()=>{
-        tPrint(`<span class="c">Found ${repos.length} repositories:</span>`);
-        repos.slice(0,8).forEach((r,i)=>tPrint(`  <span class="g">${String(i+1).padStart(2,'0')}.</span> <span class="y">${esc(r.name)}</span> <span class="d">[${r.language||'—'}]</span> <span class="g">★${r.stargazers_count}</span>`));
-        if(repos.length>8) tPrint(`  <span class="d">…and ${repos.length-8} more at github.com/${GH}</span>`);
-      },300);
-      break;
-    case 'skills':
-      tPrint(`<span class="c">Technical Skills:</span>`);
-      [['Security','Wireshark, Nmap, Metasploit, Burp Suite, Kali Linux'],['Programming','Python 85% · Bash 82% · JavaScript 75% · C/C++ 60%'],['Domains','Network Security, Threat Analysis, Privacy Eng, OSINT'],['Certs','Google Cyber, ISC² CC, Cisco CyberOps, EHE']].forEach(([k,v])=>
-        tPrint(`  <span class="g">${k.padEnd(12)}</span><span class="d">:</span> <span class="w">${v}</span>`));
-      break;
-    case 'contact':
-      tPrint(`<span class="c">Contact:</span>`);
-      [['GitHub','github.com/Bd-Mutant7'],['Email','spicezke@gmail.com'],['LinkedIn','Available on request'],['Location','Kenya, East Africa']].forEach(([k,v])=>
-        tPrint(`  <span class="g">${k.padEnd(10)}</span><span class="d">:</span> <span class="y">${v}</span>`));
-      break;
-    case 'github':
-      tPrint(`<span class="d">Opening github.com/${GH}…</span>`);
-      setTimeout(()=>{ window.open(`https://github.com/${GH}`,'_blank'); tPrint(`<span class="g">✓ Opened in new tab</span>`); },300);
-      break;
-    case 'resume':
-      tPrint(`<span class="d">Generating resume…</span>`);
-      setTimeout(()=>{ tPrint(`<span class="g">✓ Ready. Opening…</span>`); showResume(); },500);
-      break;
-    case 'clear':
-      document.getElementById('term-out').innerHTML = ''; break;
-    case 'ls':
-      tPrint(`<span class="d">projects/&nbsp;&nbsp;skills/&nbsp;&nbsp;certs/&nbsp;&nbsp;blog/&nbsp;&nbsp;resume.pdf&nbsp;&nbsp;README.md</span>`); break;
-    case 'date':
-      tPrint(`<span class="d">${new Date().toUTCString()}</span>`); break;
-    default:
-      tPrint(`<span class="r">bash: ${esc(cmd)}: command not found — try 'help'</span>`);
-  }
-}
-
-// ─────────────────────────────────────────────────────
-// PACKET SNIFFER (original — unchanged)
-// ─────────────────────────────────────────────────────
-let capIv = null;
-const PROTOS=['TCP','UDP','HTTP','DNS','ICMP','TLS','SSH'];
-const PCL={TCP:'tc',UDP:'tu',HTTP:'th',DNS:'td2c',ICMP:'ti',TLS:'tc',SSH:'tu'};
-const PINF={TCP:['SYN','ACK','SYN-ACK','FIN-ACK'],UDP:['Datagram','Query'],HTTP:['GET /index.html','POST /api','200 OK'],DNS:['Query A github.com','Response 140.82.112.3'],ICMP:['Echo request','Echo reply'],TLS:['Client Hello','Server Hello'],SSH:['Key Exchange','Auth']};
-const rIP=()=>Array(4).fill(0).map(()=>Math.floor(Math.random()*254+1)).join('.');
-const rT=()=>new Date().toLocaleTimeString('en',{hour12:false})+'.'+String(Math.floor(Math.random()*999)).padStart(3,'0');
-
-function startCap(){
-  if(capIv) return;
-  document.getElementById('cap-st').innerHTML='<span style="color:var(--green)"><i class="fa-solid fa-circle"></i> CAPTURING</span>';
-  capIv=setInterval(()=>{const p=PROTOS[Math.floor(Math.random()*PROTOS.length)],info=PINF[p][Math.floor(Math.random()*PINF[p].length)];addPkt(rT(),rIP(),rIP(),p,Math.floor(Math.random()*1400+40),info);},380);
-}
-function stopCap(){
-  clearInterval(capIv);capIv=null;
-  document.getElementById('cap-st').innerHTML='<span style="color:var(--red)"><i class="fa-solid fa-square"></i> STOPPED</span>';
-}
-function clearCap(){
-  document.getElementById('pkt-body').innerHTML='';
-  document.getElementById('cap-st').innerHTML='<i class="fa-solid fa-circle"></i> IDLE';
-}
-function addPkt(t,s,d,p,l,info){
-  const tb=document.getElementById('pkt-body');
-  const tr=document.createElement('tr'); tr.className='nr';
-  tr.innerHTML=`<td>${t}</td><td>${s}</td><td>${d}</td><td class="${PCL[p]||''}">${p}</td><td>${l}</td><td>${info}</td>`;
-  tb.insertBefore(tr,tb.firstChild);
-  if(tb.children.length>80) tb.removeChild(tb.lastChild);
-}
-
-// ─────────────────────────────────────────────────────
-// SECURITY LAB — TAB SWITCHER (added)
-// ─────────────────────────────────────────────────────
-function switchLab(id, btn) {
-  document.querySelectorAll('.lab-panel').forEach(p => p.classList.remove('lp-on'));
-  document.querySelectorAll('.lt').forEach(b => b.classList.remove('lt-on'));
-  document.getElementById('lab-' + id).classList.add('lp-on');
-  btn.classList.add('lt-on');
-}
-
-// ─────────────────────────────────────────────────────
-// PORT SCANNER (added)
-// ─────────────────────────────────────────────────────
-const SCAN_PORTS = [
-  {p:21,s:'FTP'},{p:22,s:'SSH'},{p:23,s:'Telnet'},{p:25,s:'SMTP'},
-  {p:53,s:'DNS'},{p:80,s:'HTTP'},{p:110,s:'POP3'},{p:143,s:'IMAP'},
-  {p:443,s:'HTTPS'},{p:3306,s:'MySQL'},{p:5432,s:'PgSQL'},{p:6379,s:'Redis'},
-  {p:8080,s:'HTTP-Alt'},{p:8443,s:'HTTPS-Alt'},{p:27017,s:'Mongo'},{p:9200,s:'Elastic'}
-];
-
-function runPortScan() {
-  const target = document.getElementById('scan-ip').value.trim() || '192.168.1.1';
-  const log = document.getElementById('scan-log');
-  const grid = document.getElementById('port-grid');
-  log.innerHTML = `<span style="color:var(--cyan)">Scanning ${esc(target)}…</span>`;
-  grid.innerHTML = SCAN_PORTS.map(({p,s}) =>
-    `<div class="port-cell psc-scan" id="pc-${p}">
-      <span class="port-num">${p}</span>
-      <span class="port-svc">${s}</span>
-    </div>`
-  ).join('');
-  SCAN_PORTS.forEach(({p}, i) => setTimeout(() => {
-    const open = Math.random() > .48;
-    const el = document.getElementById('pc-' + p);
-    if (!el) return;
-    el.className = 'port-cell ' + (open ? 'psc-on' : 'psc-off');
-    el.querySelector('.port-svc').textContent = open ? 'OPEN' : 'CLOSED';
-  }, (i + 1) * 260));
-  setTimeout(() => {
-    const opens = document.querySelectorAll('#port-grid .psc-on').length;
-    log.innerHTML = `<span style="color:var(--green)">✓ ${opens} open port${opens!==1?'s':''} on ${esc(target)}</span>`;
-  }, SCAN_PORTS.length * 260 + 400);
-}
-
-// ─────────────────────────────────────────────────────
-// HASH GENERATOR (added)
-// ─────────────────────────────────────────────────────
-async function genHashes() {
-  const txt = document.getElementById('hash-input').value;
-  const out = document.getElementById('hash-output');
-  if (!txt) {
-    out.innerHTML = '<span style="font-family:\'Share Tech Mono\',monospace;font-size:.7rem;color:var(--t3)">Type above to generate hashes in real-time…</span>';
-    return;
-  }
-  const enc = new TextEncoder();
-  const buf = enc.encode(txt);
-  const algos = [['SHA-1','SHA-1'],['SHA-256','SHA-256'],['SHA-384','SHA-384'],['SHA-512','SHA-512']];
-  const results = await Promise.all(algos.map(async ([name, algo]) => {
-    const h = await crypto.subtle.digest(algo, buf);
-    const hex = Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');
-    return [name, hex];
-  }));
-  const md5sim = Math.abs(txt.split('').reduce((h,c)=>(((h<<5)-h)+c.charCodeAt(0))|0,0)).toString(16).padStart(8,'0');
-  out.innerHTML = [['MD5 (simulated)', md5sim], ...results].map(([n, v]) =>
-    `<div class="hash-result-block">
-      <div class="hash-algo-lbl">${n}</div>
-      <div class="hash-val">${v}</div>
-    </div>`
-  ).join('');
-}
-
-// ─────────────────────────────────────────────────────
-// BASE64 ENCODE / DECODE (added)
-// ─────────────────────────────────────────────────────
-let b64mode = 'enc';
-
-function setB64Mode(m, btn) {
-  b64mode = m;
-  document.querySelectorAll('.b64-tog').forEach(b => {
-    b.className = b.id === 'b64-enc-btn'
-      ? (m === 'enc' ? 'cb cs b64-tog' : 'cb cc b64-tog')
-      : (m === 'dec' ? 'cb cs b64-tog' : 'cb cc b64-tog');
-  });
-  runB64();
-}
-
-function runB64() {
-  const inp = document.getElementById('b64-input').value;
-  const out = document.getElementById('b64-output');
-  if (!inp) { out.textContent = '—'; return; }
-  try {
-    out.textContent = b64mode === 'enc'
-      ? btoa(unescape(encodeURIComponent(inp)))
-      : decodeURIComponent(escape(atob(inp)));
-  } catch(e) {
-    out.textContent = 'Invalid input for decoding';
-  }
-}
-
-// ─────────────────────────────────────────────────────
-// BLOG
-// ─────────────────────────────────────────────────────
-const POSTS=[
-  {tag:'Network Security',title:'Passive Packet Sniffing: Techniques & Detection',excerpt:"In-depth look at passive network sniffing using Python's Scapy library, including how defenders detect rogue sniffers.",date:'2024-11',read:'12 min'},
-  {tag:'CTF Writeup',title:'TryHackMe: Mr Robot CTF — Full Walkthrough',excerpt:'Step-by-step walkthrough: enumeration, WordPress exploitation and privilege escalation techniques.',date:'2024-09',read:'20 min'},
-  {tag:'Privacy',title:'Top Privacy Tools for 2025',excerpt:'Practical guide for reducing your digital footprint using open-source privacy tools: VPNs, Tor, encrypted messaging.',date:'2024-08',read:'15 min'},
-  {tag:'Threat Analysis',title:'Modern Ransomware: Attack Chains & Mitigation',excerpt:'Analysis of current ransomware attack chains from initial access through payload delivery, IOCs and IR playbooks.',date:'2024-06',read:'18 min'},
-  {tag:'USB Security',title:'USB Attack Vectors & Anti-Theft Countermeasures',excerpt:'Research into BadUSB and Rubber Ducky attacks. Walkthrough of building the anti-theft-charge utility in Python.',date:'2024-04',read:'10 min'},
-  {tag:'OSINT',title:'OSINT Techniques for Threat Hunting',excerpt:'Introduction to open-source intelligence: Maltego, Shodan, theHarvester, Google dorks and OSINT frameworks.',date:'2024-02',read:'14 min'},
-];
-let blogTag='all';
-function renderBlog(){
-  const q=document.getElementById('blog-s').value.toLowerCase();
-  const list=POSTS.filter(p=>(blogTag==='all'||p.tag.includes(blogTag))&&(!q||(p.title+p.excerpt+p.tag).toLowerCase().includes(q)));
-  document.getElementById('blog-grid').innerHTML=list.map(p=>`<div class="blog-card rv">
-    <span class="btag"><i class="fa-solid fa-tag"></i> ${p.tag}</span>
-    <h3 class="btitle">${p.title}</h3>
-    <p class="bex">${p.excerpt}</p>
-    <div class="bm"><span><i class="fa-regular fa-calendar"></i> ${p.date}</span><span><i class="fa-solid fa-clock"></i> ${p.read}</span></div>
-  </div>`).join('')||'<p style="grid-column:1/-1;text-align:center;font-family:Share Tech Mono,monospace;color:var(--t3);font-size:.78rem;padding:2rem">No posts match.</p>';
-  doReveal();
-}
-function setBT(t,btn){blogTag=t;document.querySelectorAll('.blog-ctrls .fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderBlog();}
-
-// ─────────────────────────────────────────────────────
-// AI CHAT
-// ─────────────────────────────────────────────────────
-const KB={
-  who:'Peter Kariuki is a Computer Science student at Meru University of Science and Technology (MUST) in Kenya. He specialises in cybersecurity, network security and privacy engineering. He\'s passionate about ethical hacking and building security research tools.',
-  projects:'Peter\'s projects include: (1) Network-Packet-Sniffer-GUI — Python real-time packet capture; (2) Cybersecurity-Threats-Guide — comprehensive threat documentation; (3) awesome-privacy — curated privacy tools; (4) anti-theft-charge — USB security utility; (5) recipe-book-app — full-stack web app; (6) Modern-App-Color-Combos — UI design palettes. All at github.com/Bd-Mutant7.',
-  skills:'Peter works with: Wireshark, Nmap, Metasploit, Burp Suite, Kali Linux (security tools). Programming: Python 85%, Bash 82%, JavaScript 75%, C/C++ 60%. Domains: Network Security, Threat Analysis, Digital Forensics, Privacy Engineering, OSINT.',
-  certs:'Certifications: ✓ Google Cybersecurity Professional (2024), ✓ ISC² CC (2024), ✓ Cisco CyberOps Associate (2024), ✓ EC-Council EHE (2023), ✓ TryHackMe SOC Level 1 (2023), ⟳ CompTIA Security+ (In Progress).',
-  contact:'Reach Peter via GitHub: github.com/Bd-Mutant7 | Email: available on request | LinkedIn: available on request. Open to cybersecurity internships, research and full-time roles.',
-  network:'The Network-Packet-Sniffer-Traffic-Analyse-GUI is a Python project using Scapy with a Tkinter GUI for real-time packet capture, protocol filtering and traffic visualisation.',
-  privacy:'awesome-privacy is a curated list of privacy tools covering VPNs, encrypted messaging, Tor, secure browsers and data minimisation practices.',
-  must:'Peter studies Computer Science at Meru University of Science and Technology (MUST) in Kenya — a public university known for engineering and technology.',
-  usb:'anti-theft-charge is a Python security utility protecting against BadUSB, Rubber Ducky and unauthorised USB data exfiltration attacks.',
-  ctf:'Peter participates in CTF challenges on TryHackMe and writes technical security writeups on topics like packet sniffing, privilege escalation and OSINT.',
-};
-function aiReply(q){
-  const l=q.toLowerCase();
-  if(/hello|hi|hey/.test(l)) return 'Hello! How can I help you learn about Peter\'s work?';
-  if(/who|about|peter|kariuki|background/.test(l)) return KB.who;
-  if(/project|repo|github|build/.test(l)) return KB.projects;
-  if(/skill|tool|use|wireshark|nmap|python|kali/.test(l)) return KB.skills;
-  if(/cert|certif|qualif/.test(l)) return KB.certs;
-  if(/contact|hire|email|reach/.test(l)) return KB.contact;
-  if(/packet|sniffer|scapy|traffic/.test(l)) return KB.network;
-  if(/privacy|awesome/.test(l)) return KB.privacy;
-  if(/must|meru|university|student|study/.test(l)) return KB.must;
-  if(/usb|theft|badusb/.test(l)) return KB.usb;
-  if(/ctf|tryhack|writeup|capture/.test(l)) return KB.ctf;
-  return "I can tell you about Peter's projects, skills, certifications, MUST, or how to contact him. What would you like to know?";
-}
-function toggleAI(){
-  const p=document.getElementById('ai-panel');p.classList.toggle('open');
-  if(p.classList.contains('open')) setTimeout(()=>document.getElementById('ai-in').focus(),100);
-}
-function sendAI(){
-  const inp=document.getElementById('ai-in'),q=inp.value.trim();
-  if(!q) return;
-  addAIMsg(q,'u'); inp.value='';
-  document.getElementById('ai-quick').style.display='none';
-  setTimeout(()=>addAIMsg(aiReply(q),'a'),600);
-}
-function askAI(q){addAIMsg(q,'u');document.getElementById('ai-quick').style.display='none';setTimeout(()=>addAIMsg(aiReply(q),'a'),600);}
-function addAIMsg(txt,role){
-  const msgs=document.getElementById('ai-msgs'),d=document.createElement('div');
-  d.className=`msg m${role}`;
-  const av=role==='a'?`<i class="fa-solid fa-robot" style="font-size:.6rem;color:#020408"></i>`:`<i class="fa-solid fa-user" style="font-size:.6rem;color:var(--cyan)"></i>`;
-  d.innerHTML=`<div class="mav">${av}</div><div class="mb">${esc(txt)}</div>`;
-  msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
-}
-
-// ─────────────────────────────────────────────────────
-// RESUME
-// ─────────────────────────────────────────────────────
-function showResume(){
-  const txt=`PETER KARIUKI
-=====================================
-Cybersecurity Student & Researcher
-Meru University of Science and Technology
-BSc Computer Science
-github.com/Bd-Mutant7 | Kenya
-
-PROFILE
--------
-CS student specialising in cybersecurity,
-network security and privacy engineering.
-
-SKILLS
-------
-Security : Wireshark, Nmap, Metasploit,
-           Burp Suite, Kali Linux, OWASP
-Languages: Python 85% | Bash 82% |
-           JavaScript 75% | C/C++ 60%
-Domains  : Network Security, Threat
-           Analysis, Privacy Engineering
-
-FEATURED PROJECTS
------------------
-${FEATURED.map((n,i)=>`${i+1}. ${n}`).join('\n')}
-
-CERTIFICATIONS
---------------
-• Google Cybersecurity Certificate (2024)
-• ISC² Certified in Cybersecurity (2024)
-• Cisco CyberOps Associate (2024)
-• EC-Council EHE (2023)
-• TryHackMe SOC Level 1 (2023)
-• CompTIA Security+ (In Progress)
-
-CONTACT
--------
-GitHub: github.com/Bd-Mutant7
-Location: Kenya, East Africa`;
-  document.getElementById('rprev').textContent=txt;
-  document.getElementById('rmod').classList.add('show');
-}
-function closeResume(){document.getElementById('rmod').classList.remove('show');}
-document.getElementById('rmod').addEventListener('click',e=>{if(e.target===e.currentTarget)closeResume();});
-
-function dlPDF(){
-  try {
-    const {jsPDF}=window.jspdf;
-    const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-    doc.setFillColor(2,4,8);doc.rect(0,0,210,297,'F');
-    doc.setFillColor(10,22,40);doc.rect(0,0,210,48,'F');
-    doc.setTextColor(0,212,255);doc.setFontSize(20);doc.setFont('helvetica','bold');doc.text('PETER KARIUKI',15,20);
-    doc.setFontSize(10);doc.setTextColor(0,255,136);doc.text('Cybersecurity Student & Researcher',15,29);
-    doc.setFontSize(8.5);doc.setTextColor(107,143,168);doc.text('Meru University of Science and Technology  |  github.com/Bd-Mutant7  |  Kenya',15,38);
-    let y=56;
-    const sec=(t)=>{doc.setTextColor(0,212,255);doc.setFontSize(9.5);doc.setFont('helvetica','bold');doc.text(t,15,y);doc.setDrawColor(0,70,100);doc.setLineWidth(.3);doc.line(15,y+2,195,y+2);y+=10;};
-    const line=(t,indent=15)=>{doc.setTextColor(200,220,235);doc.setFontSize(8.5);doc.setFont('helvetica','normal');const lines=doc.splitTextToSize(t,175);doc.text(lines,indent,y);y+=lines.length*5+1;};
-    const kv=(k,v)=>{doc.setTextColor(0,255,136);doc.setFontSize(8.5);doc.setFont('helvetica','bold');doc.text(k+':',15,y);doc.setTextColor(200,220,235);doc.setFont('helvetica','normal');doc.text(v,52,y);y+=6;};
-    sec('PROFILE');line('Passionate CS student specialising in cybersecurity, network security and privacy engineering. Building security research tools and contributing to open-source privacy projects.');y+=2;
-    sec('EDUCATION');kv('University','Meru University of Science and Technology');kv('Degree','BSc Computer Science (Ongoing)');kv('Focus','Cybersecurity, Network Security, Privacy Engineering');y+=2;
-    sec('TECHNICAL SKILLS');kv('Security Tools','Wireshark, Nmap, Metasploit, Burp Suite, Kali Linux');kv('Programming','Python (85%), Bash (82%), JavaScript (75%), C/C++ (60%)');kv('Domains','Network Security, Threat Analysis, OSINT, Privacy Engineering');y+=2;
-    sec('FEATURED PROJECTS');
-    FEATURED.forEach(name=>{const m=FMETA[name]||{};doc.setTextColor(0,255,136);doc.setFontSize(8.5);doc.setFont('helvetica','bold');doc.text('• '+name,15,y);y+=5;if(m.d){line(m.d,20);}});y+=2;
-    sec('CERTIFICATIONS');['Google Cybersecurity Professional Certificate (2024)','ISC² Certified in Cybersecurity CC (2024)','Cisco CyberOps Associate CBROPS (2024)','EC-Council EHE — Ethical Hacking Essentials (2023)','TryHackMe Pre-Security & SOC Level 1 (2023)','CompTIA Security+ SY0-701 (In Progress)'].forEach(c=>line('• '+c,18));
-    doc.save('Peter_Kariuki_Resume.pdf');
-  } catch(e) { alert('PDF download ready — please check your browser pop-up settings.'); }
-}
-
-// ─────────────────────────────────────────────────────
-// CONTACT FORM
-// ─────────────────────────────────────────────────────
-function handleForm(e){
-  e.preventDefault();
-  const btn=e.target.querySelector('.btn-g');
-  btn.innerHTML='<i class="fa-solid fa-check"></i> SENT!';
-  btn.style.borderColor='var(--green)';btn.style.color='var(--green)';
-  setTimeout(()=>{btn.innerHTML='SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>';btn.style.borderColor='';btn.style.color='';},3000);
-}
-
-// ─────────────────────────────────────────────────────
-// SCROLL REVEAL
-// ─────────────────────────────────────────────────────
-function doReveal(){
-  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.06});
-  document.querySelectorAll('.rv:not(.on)').forEach(el=>io.observe(el));
-}
-
-// ─────────────────────────────────────────────────────
-// INIT
-// ─────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  try { doReveal(); } catch(e) {}
-  try { renderProjects(); } catch(e) {}
-  try { buildSkills(); } catch(e) {}
-  try { buildRadar(); } catch(e) {}
-  try { renderBlog(); } catch(e) {}
-  try { fetchGH(); } catch(e) {}
+const base64Input=byId('base64-input'),base64Output=byId('base64-output');
+byId('base64-encode').addEventListener('click',()=>{
+  const bytes=new TextEncoder().encode(base64Input.value);
+  base64Output.textContent=btoa(String.fromCharCode(...bytes))||'Nothing to encode.';
 });
+byId('base64-decode').addEventListener('click',()=>{
+  try{
+    const binary=atob(base64Input.value.trim());
+    base64Output.textContent=new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(binary,char=>char.charCodeAt(0)));
+  }catch{base64Output.textContent='Invalid Base64 input. Check for missing characters or padding.'}
+});
+
+const mapCanvas=byId('attack-map'),mapContext=mapCanvas.getContext('2d');
+const mapCities={Nairobi:[-1.29,36.82],Moscow:[55.75,37.62],London:[51.51,-0.13],Paris:[48.86,2.35],'New York':[40.71,-74.01],Lagos:[6.52,3.38],Dubai:[25.2,55.27],Mumbai:[19.08,72.88],Cairo:[30.04,31.24]};
+const mapView={lon:4,lat:22};
+const mapState={width:0,height:0,radius:0,attacks:[],incoming:0,outgoing:0,lastSpawn:0};
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let mapFrame=0,mapVisible=false;
+
+const toVector=(lat,lon)=>{const phi=lat*Math.PI/180,lambda=lon*Math.PI/180;return[Math.cos(phi)*Math.cos(lambda),Math.cos(phi)*Math.sin(lambda),Math.sin(phi)]};
+function projectVector([vx,vy,vz]){
+  const lon=mapView.lon*Math.PI/180,tilt=mapView.lat*Math.PI/180;
+  const x1=vx*Math.cos(lon)+vy*Math.sin(lon),y1=-vx*Math.sin(lon)+vy*Math.cos(lon);
+  const depth=x1*Math.cos(tilt)+vz*Math.sin(tilt),up=-x1*Math.sin(tilt)+vz*Math.cos(tilt);
+  return{x:mapState.width/2+y1*mapState.radius,y:mapState.height/2-up*mapState.radius,visible:depth>0.02};
+}
+function arcPoint(from,to,t,lift){
+  const a=toVector(...from),b=toVector(...to);
+  const omega=Math.acos(Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2])),sinOmega=Math.sin(omega)||1;
+  const weightA=Math.sin((1-t)*omega)/sinOmega,weightB=Math.sin(t*omega)/sinOmega,scale=1+lift*Math.sin(Math.PI*t);
+  return projectVector(a.map((value,index)=>(weightA*value+weightB*b[index])*scale));
+}
+function traceLine(vectorAt,count){
+  let drawing=false;mapContext.beginPath();
+  for(let index=0;index<count;index++){
+    const point=projectVector(vectorAt(index));
+    if(point.visible){drawing?mapContext.lineTo(point.x,point.y):mapContext.moveTo(point.x,point.y);drawing=true}else drawing=false;
+  }
+  mapContext.stroke();
+}
+function drawGlobe(){
+  const{width,height,radius}=mapState,centerX=width/2,centerY=height/2;
+  mapContext.clearRect(0,0,width,height);
+  mapContext.fillStyle='rgba(34,197,94,.05)';mapContext.beginPath();mapContext.arc(centerX,centerY,radius*1.3,0,7);mapContext.fill();
+  mapContext.fillStyle='#050a07';mapContext.strokeStyle='rgba(34,197,94,.55)';mapContext.lineWidth=1.5;
+  mapContext.beginPath();mapContext.arc(centerX,centerY,radius,0,7);mapContext.fill();mapContext.stroke();
+  mapContext.strokeStyle='rgba(34,197,94,.16)';mapContext.lineWidth=1;
+  for(let lat=-60;lat<=60;lat+=30)traceLine(index=>toVector(lat,index*6-180),61);
+  for(let lon=-180;lon<180;lon+=30)traceLine(index=>toVector(index*6-90,lon),31);
+}
+function drawCities(time){
+  mapContext.font='11px ui-monospace,Menlo,Consolas,monospace';
+  for(const[name,coords]of Object.entries(mapCities)){
+    const point=projectVector(toVector(...coords));
+    if(!point.visible)continue;
+    const isOrigin=name==='Nairobi';
+    if(isOrigin){mapContext.strokeStyle='rgba(34,197,94,.5)';mapContext.beginPath();mapContext.arc(point.x,point.y,9+(time/70)%14,0,7);mapContext.stroke()}
+    mapContext.fillStyle=isOrigin?'#22c55e':'#86efac';
+    mapContext.beginPath();mapContext.arc(point.x,point.y,isOrigin?6:3.5,0,7);mapContext.fill();
+    mapContext.fillStyle='#d1fae5';mapContext.fillText(name,point.x+10,name==='Paris'?point.y+14:point.y-8);
+  }
+}
+function spawnAttack(time){
+  const city=pick(Object.keys(mapCities).filter(name=>name!=='Nairobi')),isIncoming=Math.random()<.7;
+  mapState.attacks.push({from:isIncoming?mapCities[city]:mapCities.Nairobi,to:isIncoming?mapCities.Nairobi:mapCities[city],color:isIncoming?'#ef4444':'#22c55e',start:time,duration:1600+randomInt(900)});
+  isIncoming?mapState.incoming++:mapState.outgoing++;
+  byId('map-incoming').textContent=mapState.incoming;byId('map-outgoing').textContent=mapState.outgoing;
+}
+function drawAttacks(time){
+  mapState.attacks=mapState.attacks.filter(attack=>time-attack.start<attack.duration+700);
+  for(const attack of mapState.attacks){
+    const progress=Math.min(1,(time-attack.start)/attack.duration),tailStart=Math.max(0,progress-.45);
+    mapContext.strokeStyle=mapContext.fillStyle=attack.color;mapContext.lineWidth=2;
+    let previous=null;
+    for(let step=0;step<=24;step++){
+      const point=arcPoint(attack.from,attack.to,tailStart+(progress-tailStart)*step/24,.22);
+      if(previous&&previous.visible&&point.visible){mapContext.globalAlpha=.25+.75*step/24;mapContext.beginPath();mapContext.moveTo(previous.x,previous.y);mapContext.lineTo(point.x,point.y);mapContext.stroke()}
+      previous=point;
+    }
+    mapContext.globalAlpha=1;
+    if(previous&&previous.visible){mapContext.beginPath();mapContext.arc(previous.x,previous.y,3,0,7);mapContext.fill()}
+    if(progress===1){
+      const landing=projectVector(toVector(...attack.to)),age=(time-attack.start-attack.duration)/700;
+      mapContext.globalAlpha=Math.max(0,1-age);mapContext.beginPath();mapContext.arc(landing.x,landing.y,6+age*22,0,7);mapContext.stroke();mapContext.globalAlpha=1;
+    }
+  }
+}
+function renderMap(time){
+  if(time-mapState.lastSpawn>650){spawnAttack(time);mapState.lastSpawn=time}
+  drawGlobe();drawAttacks(time);drawCities(time);
+  mapFrame=mapVisible?requestAnimationFrame(renderMap):0;
+}
+function sizeMap(){
+  const ratio=window.devicePixelRatio||1,box=mapCanvas.getBoundingClientRect();
+  mapCanvas.width=box.width*ratio;mapCanvas.height=box.height*ratio;
+  mapContext.setTransform(ratio,0,0,ratio,0,0);
+  Object.assign(mapState,{width:box.width,height:box.height,radius:Math.min(box.width,box.height)*.36});
+  if(reducedMotion){drawGlobe();drawCities(0)}
+}
+new ResizeObserver(sizeMap).observe(mapCanvas);
+new IntersectionObserver(([entry])=>{
+  mapVisible=entry.isIntersecting&&!reducedMotion;
+  if(mapVisible&&!mapFrame)mapFrame=requestAnimationFrame(renderMap);
+}).observe(mapCanvas);
 </script>
 </body>
+
 </html>
